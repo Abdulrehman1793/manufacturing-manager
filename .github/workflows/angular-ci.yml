@@ -30,24 +30,19 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
-              
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - name: Change Directory to Angular Project
-        run: cd ${{env.PROJECT_DIRECTORY}}
-
       - name: Install Dependencies
-        run: |
-          cd ${{env.PROJECT_DIRECTORY}}
-          yarn install --frozen-lockfile
+        working-directory: ${{env.PROJECT_DIRECTORY}}
+        run: yarn install --frozen-lockfile
 
       - name: Run Tests
-        run: |
-          cd ${{env.PROJECT_DIRECTORY}}
-          yarn run git-test
+        working-directory: ${{env.PROJECT_DIRECTORY}}
+        run: yarn run test --watch=false --browsers=ChromeHeadless --code-coverage
 
       - name: Archive Test Results
         uses: actions/upload-artifact@v3
@@ -57,9 +52,8 @@ jobs:
 
       - name: Build Angular App
         id: build-prod
-        run: |
-          cd ${{env.PROJECT_DIRECTORY}}
-          yarn run build --prod
+        working-directory: ${{env.PROJECT_DIRECTORY}}
+        run: yarn run build
 
       - name: Archive Build Artifacts
         id: ng-dist
