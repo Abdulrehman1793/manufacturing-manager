@@ -53,7 +53,7 @@ jobs:
       - name: Build Angular App
         id: build-prod
         working-directory: ${{env.PROJECT_DIRECTORY}}
-        run: yarn run build
+        run: yarn run build --stats-json --source-map=false
 
       - name: Archive Build Artifacts
         id: ng-dist
