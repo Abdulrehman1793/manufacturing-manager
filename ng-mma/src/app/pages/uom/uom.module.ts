@@ -12,6 +12,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { UomRoutingModule } from './uom-routing.module';
 import { UomService } from './services/uom.service';
 import { UomsComponent } from './uoms/uoms.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { UOMEffects, UOM_STATE_NAME, uomReducer } from './store';
 
 @NgModule({
   declarations: [UomsComponent],
@@ -25,6 +28,8 @@ import { UomsComponent } from './uoms/uoms.component';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
+    StoreModule.forFeature(UOM_STATE_NAME, uomReducer),
+    EffectsModule.forFeature([UOMEffects]),
   ],
   providers: [UomService],
 })

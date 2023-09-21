@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 
-import { UomService } from '../services/uom.service';
+import { UOMState } from '../store/uom.state';
+import { Store } from '@ngrx/store';
+import { findPage } from '../store';
 
 @Component({
   selector: 'app-uoms',
@@ -8,15 +10,17 @@ import { UomService } from '../services/uom.service';
   styleUrls: ['./uoms.component.scss'],
 })
 export class UomsComponent {
-  constructor(private uomService: UomService) {
-    uomService
-      .findPage({
-        action: 'page',
-        page: 0,
-        pageSize: 5,
-        sort: 'name',
-        direction: 'asc',
+  constructor(_store: Store<UOMState>) {
+    _store.dispatch(
+      findPage({
+        search: {
+          action: 'page',
+          page: 0,
+          pageSize: 5,
+          sort: 'name',
+          direction: 'asc',
+        },
       })
-      .subscribe((data) => console.log(data));
+    );
   }
 }
