@@ -9,8 +9,14 @@ import { UomService } from '../services/uom.service';
 })
 export class UomsComponent {
   constructor(private uomService: UomService) {
-    // uomService.load().subscribe((data) => {
-    //   console.log(data);
-    // });
+    uomService
+      .findPage({
+        action: 'page',
+        page: 0,
+        pageSize: 5,
+        sort: 'name',
+        direction: 'asc',
+      })
+      .subscribe((data) => console.log(data));
   }
 }
