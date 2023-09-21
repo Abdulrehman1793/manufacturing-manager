@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
-import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -27,7 +26,7 @@ public class UnitOfMeasureController {
     private final UnitOfMeasureService unitOfMeasureService;
     private final ControllerHelperService controllerHelperService;
 
-    @GetMapping("/all")
+    @GetMapping
     public PagedResponse<UnitOfMeasure> findAll(
             @RequestParam(value = "page", defaultValue = AppConstant.PAGE, required = false) int page,
             @RequestParam(value = "size", defaultValue = AppConstant.SIZE, required = false) int size,
