@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class UomDataService extends DefaultDataService<UnitOfMeasure> {
   constructor(http: HttpClient, httpUrlGenerator: HttpUrlGenerator) {
     super('UOM', http, httpUrlGenerator, {
-      root: 'http://localhost:8080/api/v2',
+      root: 'http://localhost:8080/api/v1',
       trailingSlashEndpoints: false,//TODO:trailing slash not working
     });
   }

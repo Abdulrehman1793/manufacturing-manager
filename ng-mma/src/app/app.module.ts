@@ -29,10 +29,10 @@ import { appReducer, entityConfig } from './store';
     EntityDataModule.forRoot(entityConfig),
   ],
   providers: [
-    {
-      provide: DefaultDataServiceConfig,
-      useValue: { root: 'http://localhost:8080/api/v2' },
-    },
+    // {
+    //   provide: DefaultDataServiceConfig,
+    //   useValue: { root: 'http://localhost:8080/api/v2' },
+    // },
   ],
   bootstrap: [AppComponent],
 })

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { EntityDataService } from '@ngrx/data';
+import { EntityDataService, HttpUrlGenerator } from '@ngrx/data';
 
 import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -15,11 +15,11 @@ import { UomRoutingModule } from './uom-routing.module';
 import { UomDataService } from './services/uom-data.service';
 import { UomService } from './services/uom.service';
 import { UomsComponent } from './uoms/uoms.component';
+import { CustomHttpUrlGenerator } from 'src/app/store/custom-url-gen';
+import { TrailingSlashInterceptor } from 'src/app/shared/interceptors/trailing-slash.interceptor';
 
 @NgModule({
-  declarations: [
-    UomsComponent
-  ],
+  declarations: [UomsComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -31,7 +31,15 @@ import { UomsComponent } from './uoms/uoms.component';
     MatButtonModule,
     MatIconModule,
   ],
-  providers: [UomService, UomDataService],
+  providers: [
+    UomService,
+    UomDataService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TrailingSlashInterceptor,
+      multi: true,
+    },
+  ],
 })
 export class UomModule {
   constructor(

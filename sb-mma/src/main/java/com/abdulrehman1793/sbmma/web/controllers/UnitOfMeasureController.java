@@ -19,7 +19,7 @@ import java.util.Arrays;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/v1/uom")
+@RequestMapping("/api/v1/uom")
 public class UnitOfMeasureController {
     private final String[] FIELDS = new String[]{"name"};
 
@@ -32,7 +32,7 @@ public class UnitOfMeasureController {
             @RequestParam(value = "size", defaultValue = AppConstant.SIZE, required = false) int size,
             @RequestParam(value = "sort", defaultValue = "", required = false) String[] sorts) {
 
-        log.info("Request findPage: Page" + page + ", size:" + size + "Sort :" + Arrays.stream(sorts).toList());
+        log.info("Request findPage: Page= " + page + ", size= " + size + ", Sort= " + Arrays.stream(sorts).toList());
 
         Pageable pageable = PageRequest.of(page, size, controllerHelperService.sortRequestParameterToSort(FIELDS, sorts));
 
