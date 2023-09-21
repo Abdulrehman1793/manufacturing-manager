@@ -5,9 +5,23 @@
   <span [routerLink]="['/']">Recipe Manager</span>
   <span class="spacer"></span>
 
-  <div style="display: flex; gap: 6px;">
-    <button mat-flat-button color="primary" [routerLink]="['/']" routerLinkActive="mat-accent">
+  <div style="display: flex; gap: 6px">
+    <button
+      mat-flat-button
+      color="primary"
+      [routerLink]="['/dashboard']"
+      routerLinkActive="mat-accent"
+    >
       Dashboard
+    </button>
+
+    <button
+      mat-flat-button
+      color="primary"
+      [routerLink]="['/uom']"
+      routerLinkActive="mat-accent"
+    >
+      Unit Of Measures
     </button>
   </div>
   <span class="spacer"></span>
