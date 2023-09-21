@@ -5,9 +5,11 @@ import { Observable } from 'rxjs';
 import { UnitOfMeasure } from '../models/uom';
 import { Page, Search } from 'src/app/core/models';
 
+import { environment } from '../../../../environments/environment';
+
 @Injectable()
 export class UomService {
-  _rootUrl: string = 'http://localhost:8080/api/v1/uom';
+  _rootUrl: string = `${environment.apiUrl}/uom`;
 
   constructor(private _http: HttpClient) {}
 

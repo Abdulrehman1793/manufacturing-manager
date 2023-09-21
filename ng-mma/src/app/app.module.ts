@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { DefaultDataServiceConfig, EntityDataModule } from '@ngrx/data';
+import { EntityDataModule } from '@ngrx/data';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -27,12 +27,6 @@ import { appReducer, entityConfig } from './store';
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({ maxAge: 25, trace: true, traceLimit: 75 }),
     EntityDataModule.forRoot(entityConfig),
-  ],
-  providers: [
-    // {
-    //   provide: DefaultDataServiceConfig,
-    //   useValue: { root: 'http://localhost:8080/api/v2' },
-    // },
   ],
   bootstrap: [AppComponent],
 })
