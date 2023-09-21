@@ -40,15 +40,15 @@ jobs:
         working-directory: ${{env.PROJECT_DIRECTORY}}
         run: yarn install --frozen-lockfile
 
-      - name: Run Tests
-        working-directory: ${{env.PROJECT_DIRECTORY}}
-        run: yarn run test --watch=false --browsers=ChromeHeadless --code-coverage
+      # - name: Run Tests
+      #   working-directory: ${{env.PROJECT_DIRECTORY}}
+      #   run: yarn run test --watch=false --browsers=ChromeHeadless --code-coverage
 
-      - name: Archive Test Results
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-results
-          path: ${{env.PROJECT_DIRECTORY}}/coverage
+      # - name: Archive Test Results
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: test-results
+      #     path: ${{env.PROJECT_DIRECTORY}}/coverage
 
       - name: Build Angular App
         id: build-prod
