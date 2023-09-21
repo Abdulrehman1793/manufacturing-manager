@@ -9,8 +9,8 @@ import { UomService } from '../services/uom.service';
 })
 export class UomsComponent {
   constructor(private uomService: UomService) {
-    uomService.load().subscribe((data) => {
-      console.log(data);
-    });
+    // uomService.load().subscribe((data) => {
+    //   console.log(data);
+    // });
   }
 }

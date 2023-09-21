@@ -1,13 +1,9 @@
 import { Injectable } from '@angular/core';
-import {
-  EntityCollectionServiceBase,
-  EntityCollectionServiceElementsFactory,
-} from '@ngrx/data';
+import { HttpClient } from '@angular/common/http';
+
 import { UnitOfMeasure } from '../models/uom';
 
 @Injectable()
-export class UomService extends EntityCollectionServiceBase<UnitOfMeasure> {
-  constructor(serviceElementsFactory: EntityCollectionServiceElementsFactory) {
-    super('UOM', serviceElementsFactory);
-  }
+export class UomService {
+  constructor(private _http: HttpClient) {}
 }
