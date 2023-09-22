@@ -1,1 +1,9 @@
-<p>uoms works!</p>
+<app-table
+  #uomTable
+  [columns]="customColumns"
+  [rows$]="uoms$"
+  [loading$]="loading$"
+  [totalElements$]="totalElements$"
+  [pageSize$]="pageSize$"
+>
+</app-table>

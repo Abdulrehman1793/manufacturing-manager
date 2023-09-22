@@ -21,7 +21,7 @@ import java.util.Arrays;
 @RestController
 @RequestMapping("/api/v1/uom")
 public class UnitOfMeasureController {
-    private final String[] FIELDS = new String[]{"name"};
+    private final String[] FIELDS = new String[]{"id", "name"};
 
     private final UnitOfMeasureService unitOfMeasureService;
     private final ControllerHelperService controllerHelperService;

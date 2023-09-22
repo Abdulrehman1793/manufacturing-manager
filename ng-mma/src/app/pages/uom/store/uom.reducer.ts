@@ -10,8 +10,6 @@ const _uomReducer = createReducer(
     loading: true,
   })),
   on(UOMActions.findPageSuccess, (state, { page }) => {
-    console.log(page);
-
     return {
       ...state,
       page,

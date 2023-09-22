@@ -16,6 +16,8 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { UOMEffects, UOM_STATE_NAME, uomReducer } from './store';
 
+import { TableComponent } from 'src/app/shared/table/table.component';
+
 @NgModule({
   declarations: [UomsComponent],
   imports: [
@@ -28,6 +30,7 @@ import { UOMEffects, UOM_STATE_NAME, uomReducer } from './store';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
+    TableComponent,
     StoreModule.forFeature(UOM_STATE_NAME, uomReducer),
     EffectsModule.forFeature([UOMEffects]),
   ],

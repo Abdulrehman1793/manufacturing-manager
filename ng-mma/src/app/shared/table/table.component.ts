@@ -12,6 +12,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Search } from '../model';
 import { tableMaterialModules } from './material.module';
+import { Observable, of } from 'rxjs';
+import { CdkTableDataSourceInput } from '@angular/cdk/table';
 
 @Component({
   selector: 'app-table',
@@ -24,11 +26,11 @@ export class TableComponent<T> implements OnInit, AfterViewInit {
   @Input() columns: CustomColumn[] = [];
   displayedColumns: string[] = [];
 
-  @Input() pageSize: number = 10;
-  @Input() totalElements: number = 0;
+  @Input() pageSize$: Observable<number> = of(10);
+  @Input() totalElements$: Observable<number> = of(0);
 
-  @Input() rows: T[] = [];
-  @Input() loading: boolean = false;
+  @Input() rows$: Observable<T[]> = of([]);
+  @Input() loading$: Observable<boolean> = of(false);
   @Input() error: string | undefined;
 
   @Output() onAdd: EventEmitter<T> = new EventEmitter();
