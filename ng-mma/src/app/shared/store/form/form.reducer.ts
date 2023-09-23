@@ -4,8 +4,9 @@ import { initialFormState } from './form.state';
 
 export const formReducer = createReducer(
   initialFormState,
-  on(FormActions.submitForm, (state) => ({
+  on(FormActions.submitForm, (state, { formData }) => ({
     ...state,
+    data: formData,
     submitting: true,
     submitted: false,
     error: null,

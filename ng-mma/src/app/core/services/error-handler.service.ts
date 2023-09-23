@@ -18,4 +18,10 @@ export class ErrorHandlerService {
 
     this._snackBar.open(message, 'Error', { duration: 9 * 1000 });
   }
+
+  handleValidationError(error: HttpErrorResponse): void {
+    let message = 'Input Validation Failed';
+
+    this._snackBar.open(message, 'Error', { duration: 9 * 1000 });
+  }
 }

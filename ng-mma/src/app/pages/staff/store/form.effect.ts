@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -15,16 +17,16 @@ export class StaffFormEffects {
       ofType(FormAction.submitForm),
       switchMap(({ formData }) =>
         this._staffService.createStaff(formData).pipe(
-          map((data) => {
-            return FormAction.submitFormSuccess();
-          }),
-          catchError((error) =>
-            of(
+          map(() => FormAction.submitFormSuccess()),
+          catchError((error: HttpErrorResponse) => {
+            console.log(error.error);
+
+            return of(
               FormAction.submitFormFailure({
-                error: error.message,
+                error: error.error,
               })
-            )
-          )
+            );
+          })
         )
       )
     )

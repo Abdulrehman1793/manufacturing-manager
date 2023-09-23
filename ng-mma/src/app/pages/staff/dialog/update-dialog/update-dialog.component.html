@@ -55,7 +55,9 @@
         placeholder="Address"
         formControlName="address"
       ></textarea>
-      <mat-hint>Flat/House/Shop No., street name, locality</mat-hint>
+      <mat-hint *ngIf="!form.controls.address.touched"
+        >Flat/House/Shop No., street name, locality</mat-hint
+      >
       <mat-error *ngIf="form.controls.address.hasError('required')"
         >Address is required</mat-error
       >
