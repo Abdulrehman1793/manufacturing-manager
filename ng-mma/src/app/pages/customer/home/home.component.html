@@ -1,0 +1,10 @@
+<app-table
+  #customerTable
+  [columns]="customColumns"
+  [rows$]="customers$"
+  [loading$]="loading$"
+  [totalElements$]="totalElements$"
+  [pageSize$]="pageSize$"
+  (onSortAndPageUpdate)="onSortAndPageUpdate($event)"
+>
+</app-table>

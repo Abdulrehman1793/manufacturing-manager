@@ -11,6 +11,12 @@ const routes: Routes = [
       import('./pages/staff/staff.module').then((m) => m.StaffModule),
   },
   {
+    path: 'customer',
+    title: 'Customer',
+    loadChildren: () =>
+      import('./pages/customer/customer.module').then((m) => m.CustomerModule),
+  },
+  {
     path: 'uom',
     title: 'Unit Of Measurments',
     loadChildren: () =>
