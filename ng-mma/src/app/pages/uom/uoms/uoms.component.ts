@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
+import { Observable, of } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { UOMState, initialUOMState } from '../store/uom.state';
@@ -7,9 +8,9 @@ import { findPage, loading, pageSize, totalElements, uoms } from '../store';
 import {
   CustomColumn,
   TableComponent,
-} from 'src/app/shared/table/table.component';
+} from '../../../shared/table/table.component';
+import { Search } from '../../../core/models';
 import { UnitOfMeasure } from '../models/uom';
-import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-uoms',
@@ -38,10 +39,13 @@ export class UomsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('uoms');
     this.uoms$ = this.uomStore.select(uoms);
     this.loading$ = this.uomStore.select(loading);
     this.totalElements$ = this.uomStore.select(totalElements);
     this.pageSize$ = this.uomStore.select(pageSize);
+  }
+
+  onSortAndPageUpdate(search: Search) {
+    this.uomStore.dispatch(findPage({ search }));
   }
 }

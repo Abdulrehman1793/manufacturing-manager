@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
+import { Observable, of } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { StaffState, initialStaffState } from '../store/staff.state';
@@ -7,9 +8,9 @@ import { findPage, loading, pageSize, totalElements, staffs } from '../store';
 import {
   CustomColumn,
   TableComponent,
-} from 'src/app/shared/table/table.component';
+} from '../../../shared/table/table.component';
+import { Search } from '../../../core/models';
 import { Staff } from '../models/staff';
-import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -53,11 +54,13 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('staff');
-
     this.staffs$ = this.uomStore.select(staffs);
     this.loading$ = this.uomStore.select(loading);
     this.totalElements$ = this.uomStore.select(totalElements);
     this.pageSize$ = this.uomStore.select(pageSize);
+  }
+
+  onSortAndPageUpdate(search: Search) {
+    this.uomStore.dispatch(findPage({ search }));
   }
 }
