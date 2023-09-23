@@ -15,9 +15,10 @@ import { StaffRoutingModule } from './customer-routing.module';
 import { CustomerEffects, CUSTOMER_STATE_NAME, customerReducer } from './store';
 import { HomeComponent } from './home/home.component';
 import { CustomerService } from './services/customer.service';
+import { UpdateDialogComponent } from './dialog/update-dialog/update-dialog.component';
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [HomeComponent, UpdateDialogComponent],
   imports: [
     CommonModule,
     StaffRoutingModule,

@@ -18,9 +18,10 @@ import { UomsComponent } from './uoms/uoms.component';
 import { UOMEffects, UOM_STATE_NAME, uomReducer } from './store';
 
 import { TableComponent } from '../../shared/table/table.component';
+import { UpdateDialogComponent } from './dialog/update-dialog/update-dialog.component';
 
 @NgModule({
-  declarations: [UomsComponent],
+  declarations: [UomsComponent, UpdateDialogComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

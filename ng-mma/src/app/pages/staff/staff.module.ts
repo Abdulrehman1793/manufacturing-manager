@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -16,11 +17,13 @@ import { StaffRoutingModule } from './staff-routing.module';
 import { StaffEffects, STAFF_STATE_NAME, staffReducer } from './store';
 import { HomeComponent } from './home/home.component';
 import { StaffService } from './services/staff.service';
+import { UpdateDialogComponent } from './dialog/update-dialog/update-dialog.component';
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [HomeComponent, UpdateDialogComponent],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     StaffRoutingModule,
     MatChipsModule,
     MatFormFieldModule,

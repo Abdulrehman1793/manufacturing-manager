@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { MatDialog } from '@angular/material/dialog';
 
 import { StaffState, initialStaffState } from '../store/staff.state';
 import { findPage, loading, pageSize, totalElements, staffs } from '../store';
@@ -11,8 +12,7 @@ import {
 } from '../../../shared/table/table.component';
 import { Search } from '../../../core/models';
 import { Staff } from '../models/staff';
-import { MatDialog } from '@angular/material/dialog';
-import { FormDialogComponent } from 'src/app/shared/form-dialog/form-dialog.component';
+import { UpdateDialogComponent } from '../dialog/update-dialog/update-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -67,7 +67,7 @@ export class HomeComponent implements OnInit {
   }
 
   onCreate() {
-    const dialogRef = this.dialog.open(FormDialogComponent, {
+    const dialogRef = this.dialog.open(UpdateDialogComponent, {
       data: { name: 'this.name', animal: 'this.animal' },
     });
 

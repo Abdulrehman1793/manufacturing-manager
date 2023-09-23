@@ -18,7 +18,7 @@ public class Person {
     @Column(length = 100, nullable = false)
     private String name;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 24, nullable = false)
     private String phone;
 
     @Column(length = 50, nullable = false, unique = true)
