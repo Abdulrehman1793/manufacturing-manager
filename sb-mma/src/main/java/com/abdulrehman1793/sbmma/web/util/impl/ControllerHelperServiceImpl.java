@@ -23,11 +23,11 @@ public class ControllerHelperServiceImpl implements ControllerHelperService {
         List<Sort.Order> orders = new ArrayList<>();
         for (String sortParameter : sortParameters) {
             if (!sortParameter.contains(":"))
-                throw new BadRequestException("Found invalid sort parameter: " + sortParameter);
+                throw new BadRequestException("Found invalid sort parameter - " + sortParameter);
 
             String[] sortPair = sortParameter.split(":");
             if (!contains(domainFields, sortPair[0])) {
-                throw new BadRequestException("Found invalid sort field: " + sortPair[0]);
+                throw new BadRequestException("Found invalid sort field - " + sortPair[0]);
             }
 
             orders.add(new Sort.Order(getSortDirection(sortPair[1]), sortPair[0]));
@@ -46,6 +46,6 @@ public class ControllerHelperServiceImpl implements ControllerHelperService {
         } else if (List.of("dsc", "desc", "descending").contains(direction.toLowerCase())) {
             return Sort.Direction.DESC;
         }
-        throw new BadRequestException("Found invalid sort direction: " + direction);
+        throw new BadRequestException("Found invalid sort direction - " + direction);
     }
 }

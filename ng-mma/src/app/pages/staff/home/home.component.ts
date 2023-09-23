@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
     {
       columnDef: 'email',
       title: 'Email',
-      sort: true,
+      sort: false,
     },
     {
       columnDef: 'city',
