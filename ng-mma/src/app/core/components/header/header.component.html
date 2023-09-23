@@ -18,11 +18,52 @@
     <button
       mat-flat-button
       color="primary"
-      [routerLink]="['/uom']"
-      routerLinkActive="mat-accent"
+      routerLink="/uom"
+      routerLinkActive
+      #parentRla="routerLinkActive"
+      [matMenuTriggerFor]="staff"
+      [class.mat-accent]="parentRla.isActive"
     >
-      Unit Of Measures
+      Masters
     </button>
+    <mat-menu #staff="matMenu">
+      <button
+        mat-menu-item
+        color="primary"
+        routerLink="/uom"
+        routerLinkActive
+        #rla="routerLinkActive"
+        [class.mat-accent]="rla.isActive"
+      >
+        Staff & Resources
+      </button>
+      <button mat-menu-item>Item 2</button>
+    </mat-menu>
+
+    <button
+      mat-flat-button
+      color="primary"
+      routerLink="/uom"
+      routerLinkActive
+      #parentRla="routerLinkActive"
+      [matMenuTriggerFor]="settings"
+      [class.mat-accent]="parentRla.isActive"
+    >
+      Settings
+    </button>
+    <mat-menu #settings="matMenu">
+      <button
+        mat-menu-item
+        color="primary"
+        routerLink="/uom"
+        routerLinkActive
+        #rla="routerLinkActive"
+        [class.mat-accent]="rla.isActive"
+      >
+        Unit Of Measures
+      </button>
+      <button mat-menu-item>Item 2</button>
+    </mat-menu>
   </div>
   <span class="spacer"></span>
 

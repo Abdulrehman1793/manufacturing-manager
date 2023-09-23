@@ -13,12 +13,12 @@ import { MatSort } from '@angular/material/sort';
 import { Search } from '../model';
 import { tableMaterialModules } from './material.module';
 import { Observable, of } from 'rxjs';
-import { CdkTableDataSourceInput } from '@angular/cdk/table';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [CommonModule, tableMaterialModules],
+  imports: [CommonModule, ReactiveFormsModule, tableMaterialModules],
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
 })
