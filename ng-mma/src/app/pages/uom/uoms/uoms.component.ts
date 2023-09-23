@@ -38,6 +38,7 @@ export class UomsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('uoms');
     this.uoms$ = this.uomStore.select(uoms);
     this.loading$ = this.uomStore.select(loading);
     this.totalElements$ = this.uomStore.select(totalElements);

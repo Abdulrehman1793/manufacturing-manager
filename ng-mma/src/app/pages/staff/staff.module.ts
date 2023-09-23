@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -12,29 +10,26 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
-import { UomRoutingModule } from './uom-routing.module';
-import { UomService } from './services/uom.service';
-import { UomsComponent } from './uoms/uoms.component';
-import { UOMEffects, UOM_STATE_NAME, uomReducer } from './store';
-
 import { TableComponent } from '../../shared/table/table.component';
+import { StaffRoutingModule } from './staff-routing.module';
+import { StaffEffects, STAFF_STATE_NAME, staffReducer } from './store';
+import { HomeComponent } from './home/home.component';
+import { StaffService } from './services/staff.service';
 
 @NgModule({
-  declarations: [UomsComponent],
+  declarations: [HomeComponent],
   imports: [
     CommonModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    UomRoutingModule,
+    StaffRoutingModule,
     MatChipsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatIconModule,
     TableComponent,
-    StoreModule.forFeature(UOM_STATE_NAME, uomReducer),
-    EffectsModule.forFeature([UOMEffects]),
+    StoreModule.forFeature(STAFF_STATE_NAME, staffReducer),
+    EffectsModule.forFeature([StaffEffects]),
   ],
-  providers: [UomService],
+  providers: [StaffService],
 })
-export class UomModule {}
+export class StaffModule {}

@@ -5,6 +5,12 @@ import { UomsComponent } from './pages/uom/uoms/uoms.component';
 
 const routes: Routes = [
   {
+    path: 'staff',
+    title: 'Staff',
+    loadChildren: () =>
+      import('./pages/staff/staff.module').then((m) => m.StaffModule),
+  },
+  {
     path: 'uom',
     title: 'Unit Of Measurments',
     loadChildren: () =>

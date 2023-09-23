@@ -1,14 +1,14 @@
 import { Page, Search } from '../../../core/models';
-import { UnitOfMeasure } from '../models/uom';
+import { Staff } from '../models/staff';
 
-export interface UOMState {
-  page: Page<UnitOfMeasure> | undefined;
+export interface StaffState {
+  page: Page<Staff> | undefined;
   search: Search;
   loading: boolean;
   failure?: string | undefined;
 }
 
-export const initialUOMState: UOMState = {
+export const initialStaffState: StaffState = {
   page: undefined,
   search: {
     page: 0,
