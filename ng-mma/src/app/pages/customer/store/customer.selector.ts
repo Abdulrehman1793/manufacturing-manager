@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { CustomerState } from './customer.state';
 
-export const CUSTOMER_STATE_NAME = 'staff';
+export const CUSTOMER_STATE_NAME = 'customer';
 
 const state = createFeatureSelector<CustomerState>(CUSTOMER_STATE_NAME);
 
