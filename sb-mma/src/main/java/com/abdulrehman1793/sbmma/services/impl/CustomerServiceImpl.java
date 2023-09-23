@@ -32,4 +32,9 @@ public class CustomerServiceImpl implements PersonService {
                 page.getTotalElements()
         );
     }
+
+    @Override
+    public boolean isEmailAlreadyExists(String email) {
+        return personRepository.existsPersonByEmail(email);
+    }
 }

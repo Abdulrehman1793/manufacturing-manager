@@ -6,4 +6,6 @@ import org.springframework.data.domain.Pageable;
 
 public interface PersonService {
     PagedResponse<Person> findAll(Pageable pageable);
+
+    boolean isEmailAlreadyExists(String email);
 }

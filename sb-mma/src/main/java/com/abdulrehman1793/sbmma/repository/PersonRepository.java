@@ -8,4 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PersonRepository extends JpaRepository<Person, Integer> {
     Page<Person> findAllByType(Pageable pageable, PersonType type);
+
+    Boolean existsPersonByEmail(String email);
 }

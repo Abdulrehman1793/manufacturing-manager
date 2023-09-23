@@ -15,7 +15,9 @@ export class StaffFormEffects {
       ofType(FormAction.submitForm),
       switchMap(({ formData }) =>
         this._staffService.createStaff(formData).pipe(
-          map(() => FormAction.submitFormSuccess()),
+          map((data) => {
+            return FormAction.submitFormSuccess();
+          }),
           catchError((error) =>
             of(
               FormAction.submitFormFailure({
