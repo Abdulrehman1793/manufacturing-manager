@@ -5,51 +5,27 @@
   <span [routerLink]="['/']">Recipe Manager</span>
   <span class="spacer"></span>
 
-  <div style="display: flex; gap: 6px">
+  <div style="display: flex; gap: 6px" *ngFor="let menu of menus">
     <button
       mat-flat-button
       color="primary"
-      [routerLink]="['/dashboard']"
+      [routerLink]="menu?.route ? [menu.route] : null"
       routerLinkActive="mat-accent"
+      [matMenuTriggerFor]="menuSelector"
+      (click)="openMenu(menu)"
     >
-      Dashboard
+      {{ menu.title }}
     </button>
-
-    <button mat-flat-button color="primary" [matMenuTriggerFor]="staff">
-      Masters
-    </button>
-    <mat-menu #staff="matMenu">
+    <mat-menu #menuSelector="matMenu">
       <button
+        *ngFor="let subMenu1 of selectedMenu1"
         mat-menu-item
         color="primary"
-        [routerLink]="['/staff']"
+        [routerLink]="subMenu1?.route ? [subMenu1.route] : null"
         routerLinkActive="mat-accent"
       >
-        Staff & Resources
+        {{ subMenu1.title }}
       </button>
-      <button
-        mat-menu-item
-        color="primary"
-        [routerLink]="['/customer']"
-        routerLinkActive="mat-accent"
-      >
-        Customer
-      </button>
-    </mat-menu>
-
-    <button mat-flat-button color="primary" [matMenuTriggerFor]="settings">
-      Settings
-    </button>
-    <mat-menu #settings="matMenu">
-      <button
-        mat-menu-item
-        color="primary"
-        [routerLink]="['/uom']"
-        routerLinkActive="mat-accent"
-      >
-        Unit Of Measures
-      </button>
-      <button mat-menu-item>Item 2</button>
     </mat-menu>
   </div>
   <span class="spacer"></span>
