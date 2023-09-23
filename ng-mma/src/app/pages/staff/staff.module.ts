@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { StoreModule } from '@ngrx/store';
+import { ActionReducerMap, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 import { MatChipsModule } from '@angular/material/chips';
@@ -14,10 +14,23 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 import { TableComponent } from '../../shared/table/table.component';
 import { StaffRoutingModule } from './staff-routing.module';
-import { StaffEffects, STAFF_STATE_NAME, staffReducer } from './store';
+import {
+  StaffEffects,
+  STAFF_CONTENT_STATE_NAME,
+  STAFF_FORM_STATE_NAME,
+  staffReducer,
+  STAFF_STATE_NAME,
+} from './store';
 import { HomeComponent } from './home/home.component';
 import { StaffService } from './services/staff.service';
 import { UpdateDialogComponent } from './dialog/update-dialog/update-dialog.component';
+import { formReducer } from 'src/app/shared/store/form';
+import { StaffState } from './store/staff.state';
+
+const reducers: ActionReducerMap<StaffState> = {
+  [STAFF_CONTENT_STATE_NAME]: staffReducer,
+  [STAFF_FORM_STATE_NAME]: formReducer,
+};
 
 @NgModule({
   declarations: [HomeComponent, UpdateDialogComponent],
@@ -32,7 +45,7 @@ import { UpdateDialogComponent } from './dialog/update-dialog/update-dialog.comp
     MatIconModule,
     MatDialogModule,
     TableComponent,
-    StoreModule.forFeature(STAFF_STATE_NAME, staffReducer),
+    StoreModule.forFeature(STAFF_STATE_NAME, reducers),
     EffectsModule.forFeature([StaffEffects]),
   ],
   providers: [StaffService],

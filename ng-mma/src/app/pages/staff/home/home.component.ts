@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { MatDialog } from '@angular/material/dialog';
 
-import { StaffState, initialStaffState } from '../store/staff.state';
+import { StaffState, initialStaffContentState } from '../store/staff.state';
 import { findPage, loading, pageSize, totalElements, staffs } from '../store';
 import {
   CustomColumn,
@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit {
   totalElements$: Observable<number> = of(0);
 
   constructor(private uomStore: Store<StaffState>, public dialog: MatDialog) {
-    uomStore.dispatch(findPage({ search: initialStaffState.search }));
+    uomStore.dispatch(findPage({ search: initialStaffContentState.search }));
   }
 
   ngOnInit(): void {

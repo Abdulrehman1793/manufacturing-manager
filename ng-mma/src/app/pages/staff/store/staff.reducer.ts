@@ -1,10 +1,10 @@
 import { Action, createReducer, on } from '@ngrx/store';
 
 import * as UOMActions from './staff.action';
-import { StaffState, initialStaffState } from './staff.state';
+import { StaffContentState, initialStaffContentState } from './staff.state';
 
 const _staffReducer = createReducer(
-  initialStaffState,
+  initialStaffContentState,
   on(UOMActions.findPage, (state) => ({
     ...state,
     loading: true,
@@ -25,6 +25,9 @@ const _staffReducer = createReducer(
   })
 );
 
-export function staffReducer(state: StaffState | undefined, action: Action) {
+export function staffReducer(
+  state: StaffContentState | undefined,
+  action: Action
+) {
   return _staffReducer(state, action);
 }

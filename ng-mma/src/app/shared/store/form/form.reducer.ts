@@ -1,0 +1,23 @@
+import { createReducer, on } from '@ngrx/store';
+import * as FormActions from './form.actions';
+import { initialFormState } from './form.state';
+
+export const formReducer = createReducer(
+  initialFormState,
+  on(FormActions.submitForm, (state) => ({
+    ...state,
+    submitting: true,
+    submitted: false,
+    error: null,
+  })),
+  on(FormActions.submitFormSuccess, (state) => ({
+    ...state,
+    submitting: false,
+    submitted: true,
+  })),
+  on(FormActions.submitFormFailure, (state, { error }) => ({
+    ...state,
+    submitting: false,
+    error,
+  }))
+);
