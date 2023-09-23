@@ -1,6 +1,12 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+
+import { Store } from '@ngrx/store';
+
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+
+import { StaffState } from '../../store/staff.state';
+import { submitForm } from '../../../../shared/store';
 
 @Component({
   selector: 'app-update-dialog',
@@ -22,7 +28,8 @@ export class UpdateDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<UpdateDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private store: Store<StaffState>
   ) {
     dialogRef.addPanelClass('custom-dialog-container');
     dialogRef.updateSize('50%');
@@ -30,7 +37,7 @@ export class UpdateDialogComponent {
 
   onSave() {
     if (this.form.valid) {
-      console.log(this.form.value);
+      this.store.dispatch(submitForm({ formData: this.form.value }));
     }
   }
 

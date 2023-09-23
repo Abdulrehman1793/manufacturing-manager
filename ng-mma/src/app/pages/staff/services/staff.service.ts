@@ -26,4 +26,8 @@ export class StaffService {
       params,
     });
   }
+
+  createStaff(staff: Staff) {
+    return this._http.post<any>(`${this._rootUrl}`, staff);
+  }
 }

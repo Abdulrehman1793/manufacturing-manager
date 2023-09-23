@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { ActionReducerMap, StoreModule } from '@ngrx/store';
+import { Action, ActionReducerMap, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 import { MatChipsModule } from '@angular/material/chips';
@@ -20,16 +20,23 @@ import {
   STAFF_FORM_STATE_NAME,
   staffReducer,
   STAFF_STATE_NAME,
+  StaffFormEffects,
 } from './store';
 import { HomeComponent } from './home/home.component';
 import { StaffService } from './services/staff.service';
 import { UpdateDialogComponent } from './dialog/update-dialog/update-dialog.component';
-import { formReducer } from 'src/app/shared/store/form';
+import { FormState, formReducer } from 'src/app/shared/store/form';
 import { StaffState } from './store/staff.state';
+import { Staff } from './models/staff';
 
 const reducers: ActionReducerMap<StaffState> = {
   [STAFF_CONTENT_STATE_NAME]: staffReducer,
-  [STAFF_FORM_STATE_NAME]: formReducer,
+  [STAFF_FORM_STATE_NAME]: (
+    state: FormState<Staff> | undefined,
+    action: Action
+  ) => {
+    return formReducer(state, action);
+  },
 };
 
 @NgModule({
@@ -46,7 +53,7 @@ const reducers: ActionReducerMap<StaffState> = {
     MatDialogModule,
     TableComponent,
     StoreModule.forFeature(STAFF_STATE_NAME, reducers),
-    EffectsModule.forFeature([StaffEffects]),
+    EffectsModule.forFeature([StaffEffects, StaffFormEffects]),
   ],
   providers: [StaffService],
 })

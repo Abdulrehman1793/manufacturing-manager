@@ -6,7 +6,7 @@ import {
 } from './staff.selector';
 
 export interface StaffState {
-  [STAFF_CONTENT_STATE_NAME]: any;
+  [STAFF_CONTENT_STATE_NAME]: StaffContentState;
   [STAFF_FORM_STATE_NAME]: any;
 }
 
