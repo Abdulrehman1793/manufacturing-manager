@@ -13,14 +13,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-@Qualifier("staff")
+@Qualifier("customer")
 @RequiredArgsConstructor
-public class StaffServiceImpl implements PersonService {
+public class CustomerServiceImpl implements PersonService {
+
     private final PersonRepository personRepository;
 
     @Override
     public PagedResponse<Person> findAll(Pageable pageable) {
-        Page<Person> page = personRepository.findAllByType(pageable, PersonType.staff);
+        Page<Person> page = personRepository.findAllByType(pageable, PersonType.customer);
 
         return new PagedResponse<>(
                 page.stream().toList(),

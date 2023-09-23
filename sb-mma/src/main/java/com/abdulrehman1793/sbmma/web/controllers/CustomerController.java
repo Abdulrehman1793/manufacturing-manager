@@ -18,15 +18,15 @@ import java.util.Arrays;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/v1/staff")
-public class StaffController {
+@RequestMapping("/api/v1/customer")
+public class CustomerController {
     private final String[] FIELDS = new String[]{"id", "name", "phone"};
 
 
     private final PersonService personService;
     private final ControllerHelperService controllerHelperService;
 
-    public StaffController(@Qualifier("staff") PersonService personService, ControllerHelperService controllerHelperService) {
+    public CustomerController(@Qualifier("customer") PersonService personService, ControllerHelperService controllerHelperService) {
         this.personService = personService;
         this.controllerHelperService = controllerHelperService;
     }
