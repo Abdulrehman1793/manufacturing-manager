@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { TableComponent } from '../../shared/table/table.component';
 import { StaffRoutingModule } from './staff-routing.module';
@@ -26,6 +27,7 @@ import { StaffService } from './services/staff.service';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
+    MatDialogModule,
     TableComponent,
     StoreModule.forFeature(STAFF_STATE_NAME, staffReducer),
     EffectsModule.forFeature([StaffEffects]),

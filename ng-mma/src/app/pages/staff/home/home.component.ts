@@ -11,6 +11,8 @@ import {
 } from '../../../shared/table/table.component';
 import { Search } from '../../../core/models';
 import { Staff } from '../models/staff';
+import { MatDialog } from '@angular/material/dialog';
+import { FormDialogComponent } from 'src/app/shared/form-dialog/form-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -49,7 +51,7 @@ export class HomeComponent implements OnInit {
   pageSize$: Observable<number> = of(10);
   totalElements$: Observable<number> = of(0);
 
-  constructor(private uomStore: Store<StaffState>) {
+  constructor(private uomStore: Store<StaffState>, public dialog: MatDialog) {
     uomStore.dispatch(findPage({ search: initialStaffState.search }));
   }
 
@@ -62,5 +64,15 @@ export class HomeComponent implements OnInit {
 
   onSortAndPageUpdate(search: Search) {
     this.uomStore.dispatch(findPage({ search }));
+  }
+
+  onCreate() {
+    const dialogRef = this.dialog.open(FormDialogComponent, {
+      data: { name: 'this.name', animal: 'this.animal' },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+    });
   }
 }
