@@ -23,7 +23,6 @@ import java.util.Arrays;
 public class CustomerController {
     private final String[] FIELDS = new String[]{"id", "name", "phone"};
 
-
     private final PersonService personService;
     private final ControllerHelperService controllerHelperService;
 
