@@ -9,7 +9,6 @@ import com.abdulrehman1793.sbmma.web.util.AppConstant;
 import com.abdulrehman1793.sbmma.web.util.ControllerHelperService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -47,7 +46,8 @@ public class StaffController {
     }
 
     @PostMapping
-    public ResponseEntity<CreateResponse> createStaff(@RequestBody @Valid PersonDto person) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(new CreateResponse(String.valueOf(1111)));
+    public ResponseEntity<CreateResponse> createStaff(@RequestBody @Valid PersonDto personDto) {
+        String staffId = personService.createStaff(personDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new CreateResponse(String.valueOf(staffId)));
     }
 }

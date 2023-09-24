@@ -2,17 +2,18 @@ package com.abdulrehman1793.sbmma.web.controllers;
 
 import com.abdulrehman1793.sbmma.model.Person;
 import com.abdulrehman1793.sbmma.services.PersonService;
+import com.abdulrehman1793.sbmma.web.model.CreateResponse;
 import com.abdulrehman1793.sbmma.web.model.PagedResponse;
+import com.abdulrehman1793.sbmma.web.model.PersonDto;
 import com.abdulrehman1793.sbmma.web.util.AppConstant;
 import com.abdulrehman1793.sbmma.web.util.ControllerHelperService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 
@@ -42,5 +43,11 @@ public class CustomerController {
         Pageable pageable = PageRequest.of(page, size, controllerHelperService.sortRequestParameterToSort(FIELDS, sorts));
 
         return personService.findAllCustomer(pageable);
+    }
+
+    @PostMapping
+    public ResponseEntity<CreateResponse> createCustomer(@RequestBody @Valid PersonDto personDto) {
+        String staffId = personService.createCustomer(personDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new CreateResponse(String.valueOf(staffId)));
     }
 }
