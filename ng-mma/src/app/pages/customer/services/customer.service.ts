@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 import { Customer } from '../models/customer';
 import { Page, Search } from 'src/app/core/models';
@@ -25,5 +25,10 @@ export class CustomerService {
     return this._http.get<Page<Customer>>(`${this._rootUrl}`, {
       params,
     });
+  }
+
+  createCustomer(customer: Customer) {
+    return this._http.post<any>(this._rootUrl, customer);
+    // .pipe(map((data) => ({ data, route: '' })));
   }
 }

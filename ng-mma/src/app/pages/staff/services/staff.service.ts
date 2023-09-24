@@ -28,6 +28,6 @@ export class StaffService {
   }
 
   createStaff(staff: Staff) {
-    return this._http.post<any>(`${this._rootUrl}`, staff);
+    return this._http.post<any>(this._rootUrl, staff);
   }
 }

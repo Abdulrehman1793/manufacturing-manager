@@ -4,13 +4,12 @@ import com.abdulrehman1793.sbmma.annotation.PersonUniqueEmail;
 import com.abdulrehman1793.sbmma.services.PersonService;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 public class PersonUniqueEmailValidator implements ConstraintValidator<PersonUniqueEmail, String> {
 
     private final PersonService personService;
 
-    public PersonUniqueEmailValidator(@Qualifier("staff") PersonService personService) {
+    public PersonUniqueEmailValidator(PersonService personService) {
         this.personService = personService;
     }
 

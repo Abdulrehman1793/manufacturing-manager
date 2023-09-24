@@ -6,29 +6,34 @@ import { catchError, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import * as FormAction from '../../../shared/store';
-import { StaffService } from '../services/staff.service';
+import { SuccessHandlerService } from 'src/app/core/services/succes-handler.service';
 
 @Injectable()
 export class StaffFormEffects {
-  constructor(private actions$: Actions, private _staffService: StaffService) {}
+  constructor(
+    private actions$: Actions,
+    private _succesHandle: SuccessHandlerService
+  ) {}
 
   findAllIngredients$ = createEffect(() =>
     this.actions$.pipe(
       ofType(FormAction.submitForm),
-      switchMap(({ formData }) =>
-        this._staffService.createStaff(formData).pipe(
-          map(() => FormAction.submitFormSuccess()),
+      switchMap(({ formData, save }) => {
+        return save.call(formData).pipe(
+          map((data) => {
+            this._succesHandle.recordCreated('staff/' + data.id);
+            return FormAction.submitFormSuccess({ data });
+          }),
           catchError((error: HttpErrorResponse) => {
-            console.log(error.error);
-
+            console.log(error);
             return of(
               FormAction.submitFormFailure({
                 error: error.error,
               })
             );
           })
-        )
-      )
+        );
+      })
     )
   );
 }

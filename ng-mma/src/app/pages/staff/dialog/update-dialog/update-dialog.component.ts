@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
@@ -7,11 +7,14 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { StaffState } from '../../store/staff.state';
 import { submitForm } from '../../../../shared/store';
+import { StaffService } from '../../services/staff.service';
+import { Staff } from '../../models/staff';
 
 @Component({
   selector: 'app-update-dialog',
   templateUrl: './update-dialog.component.html',
   styleUrls: ['./update-dialog.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class UpdateDialogComponent {
   form = this.fb.group({
@@ -29,7 +32,8 @@ export class UpdateDialogComponent {
     public dialogRef: MatDialogRef<UpdateDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
-    private store: Store<StaffState>
+    private store: Store<StaffState>,
+    private _service: StaffService
   ) {
     dialogRef.addPanelClass('custom-dialog-container');
     dialogRef.updateSize('50%');
@@ -37,7 +41,13 @@ export class UpdateDialogComponent {
 
   onSave() {
     if (this.form.valid) {
-      this.store.dispatch(submitForm({ formData: this.form.value }));
+      const staff: Staff = this.form.value as unknown as Staff;
+      this.store.dispatch(
+        submitForm({
+          formData: this.form.value,
+          save: () => this._service.createStaff(staff),
+        })
+      );
     }
   }
 

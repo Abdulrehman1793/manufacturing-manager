@@ -11,8 +11,9 @@ export const formReducer = createReducer(
     submitted: false,
     error: null,
   })),
-  on(FormActions.submitFormSuccess, (state) => ({
+  on(FormActions.submitFormSuccess, (state, { data }) => ({
     ...state,
+    id: data.id,
     submitting: false,
     submitted: true,
   })),
