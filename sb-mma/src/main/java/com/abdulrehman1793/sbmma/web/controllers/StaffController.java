@@ -28,7 +28,7 @@ public class StaffController {
     private final PersonService personService;
     private final ControllerHelperService controllerHelperService;
 
-    public StaffController(@Qualifier("staff") PersonService personService, ControllerHelperService controllerHelperService) {
+    public StaffController(PersonService personService, ControllerHelperService controllerHelperService) {
         this.personService = personService;
         this.controllerHelperService = controllerHelperService;
     }
@@ -43,7 +43,7 @@ public class StaffController {
 
         Pageable pageable = PageRequest.of(page, size, controllerHelperService.sortRequestParameterToSort(FIELDS, sorts));
 
-        return personService.findAll(pageable);
+        return personService.findAllStaff(pageable);
     }
 
     @PostMapping

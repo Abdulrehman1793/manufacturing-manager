@@ -26,7 +26,7 @@ public class CustomerController {
     private final PersonService personService;
     private final ControllerHelperService controllerHelperService;
 
-    public CustomerController(@Qualifier("customer") PersonService personService, ControllerHelperService controllerHelperService) {
+    public CustomerController(PersonService personService, ControllerHelperService controllerHelperService) {
         this.personService = personService;
         this.controllerHelperService = controllerHelperService;
     }
@@ -41,6 +41,6 @@ public class CustomerController {
 
         Pageable pageable = PageRequest.of(page, size, controllerHelperService.sortRequestParameterToSort(FIELDS, sorts));
 
-        return personService.findAll(pageable);
+        return personService.findAllCustomer(pageable);
     }
 }
