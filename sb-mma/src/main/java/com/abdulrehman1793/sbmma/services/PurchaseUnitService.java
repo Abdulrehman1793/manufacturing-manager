@@ -9,7 +9,7 @@ public interface PurchaseUnitService {
 
     String create(PurchaseUnitDto purchaseUnitDto);
 
-    String update(String id, PurchaseUnitDto purchaseUnitDto);
+    void update(String id, PurchaseUnitDto purchaseUnitDto);
 
     void delete(String id);
 }

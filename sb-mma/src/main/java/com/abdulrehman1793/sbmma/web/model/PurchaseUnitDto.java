@@ -1,15 +1,13 @@
 package com.abdulrehman1793.sbmma.web.model;
 
-import lombok.AllArgsConstructor;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @Builder(toBuilder = true)
-@NoArgsConstructor
-@AllArgsConstructor
 public class PurchaseUnitDto {
     private String id;
+    @NotBlank(message = "Name is required")
     private String name;
 }

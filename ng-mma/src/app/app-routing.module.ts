@@ -1,9 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { UomsComponent } from './pages/uom/uoms/uoms.component';
-
 const routes: Routes = [
+  {
+    path: 'purchase-unit',
+    title: 'Purchase Unit',
+    loadChildren: () =>
+      import('./pages/purchase-unit/purchase-unit.module').then(
+        (m) => m.PurchaseUnitModule
+      ),
+  },
   {
     path: 'staff',
     title: 'Staff',
