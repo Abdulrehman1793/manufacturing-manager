@@ -24,4 +24,8 @@ public class ProductType {
     @Enumerated(EnumType.STRING)
     @Column(length = 15, nullable = false)
     private Type type;
+
+//    TODO: implement this and handle in flyway, to make sure no concurrent update
+//    @Version
+//    private Long version;
 }
