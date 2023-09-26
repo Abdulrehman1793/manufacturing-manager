@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { TableComponent } from '../../shared/table/table.component';
 import { ProductTypeRoutingModule } from './product-type-routing.module';
@@ -53,6 +54,7 @@ const reducers: ActionReducerMap<ProductTypeState> = {
     MatIconModule,
     MatDialogModule,
     MatSnackBarModule,
+    MatRadioModule,
     TableComponent,
     StoreModule.forFeature(PRODUCT_TYPE_STATE_NAME, reducers),
     EffectsModule.forFeature([PurchaseUnitEffects, PurchaseUnitFormEffects]),

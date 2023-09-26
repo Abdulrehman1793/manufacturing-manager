@@ -6,14 +6,37 @@
       <mat-label>Name</mat-label>
       <input
         matInput
-        placeholder="Enter the name of the purchase unit"
+        placeholder="Enter the name of the product type"
         formControlName="name"
       />
       <mat-error *ngIf="form.controls.name.hasError('required')"
         >Name is required</mat-error
       >
       <mat-error *ngIf="form.controls.name.hasError('maxlength')"
-        >Name should be less than 100 characters</mat-error
+        >Name should be less than 50 characters</mat-error
+      >
+    </mat-form-field>
+
+    <!-- Name -->
+    <div>
+      <label>Goods type: </label>
+      <mat-radio-group color="primary" formControlName="type">
+        <mat-radio-button value="raw" checked>Raw goods</mat-radio-button>
+        <mat-radio-button value="finished">Finished product</mat-radio-button>
+        <mat-radio-button value="others">Others</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <!-- Description -->
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        placeholder="Enter the detail about product type"
+        formControlName="description"
+      ></textarea>
+      <mat-error *ngIf="form.controls.name.hasError('maxlength')"
+        >Description should be less than 250 characters</mat-error
       >
     </mat-form-field>
   </form>
