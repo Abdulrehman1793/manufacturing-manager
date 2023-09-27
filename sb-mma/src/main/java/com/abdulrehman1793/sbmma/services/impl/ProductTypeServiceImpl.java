@@ -8,6 +8,7 @@ import com.abdulrehman1793.sbmma.web.mappers.ProductTypeMapper;
 import com.abdulrehman1793.sbmma.web.model.PagedResponse;
 import com.abdulrehman1793.sbmma.web.model.ProductTypeDto;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -39,6 +40,8 @@ public class ProductTypeServiceImpl implements ProductTypeService {
     @Override
     public String create(ProductTypeDto productTypeDto) {
         ProductType productType = mapper.toEntity(productTypeDto);
+        String id = StringUtils.abbreviate(productType.getName(), 10);
+        productType.setId(id.toLowerCase());
         productType = productTypeRepository.save(productType);
         return String.valueOf(productType.getId());
     }

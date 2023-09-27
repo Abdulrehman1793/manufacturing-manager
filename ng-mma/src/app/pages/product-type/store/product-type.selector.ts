@@ -24,3 +24,8 @@ export const totalElements = createSelector(
   (state) => state.page?.totalElements || 0
 );
 export const loading = createSelector(content, (state) => state.loading);
+
+export const form = createSelector(state, (state) => state.form);
+
+export const submitted = createSelector(form, (state) => state.submitted);
+export const submitting = createSelector(form, (state) => state.submitting);

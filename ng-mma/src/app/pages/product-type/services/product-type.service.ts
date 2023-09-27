@@ -32,6 +32,8 @@ export class ProductTypeService {
   }
 
   update(productType: ProductType) {
+    console.log(productType);
+
     return this._http.put<any>(
       `${this._rootUrl}/${productType.id}`,
       productType

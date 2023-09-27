@@ -75,7 +75,17 @@ export class HomeComponent implements OnInit {
 
   onCreate() {
     const dialogRef = this.dialog.open(UpdateDialogComponent, {
-      data: { name: 'this.name', animal: 'this.animal' },
+      data: undefined,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  onUpdate(productType: ProductType) {
+    const dialogRef = this.dialog.open(UpdateDialogComponent, {
+      data: productType,
     });
 
     dialogRef.afterClosed().subscribe((result) => {

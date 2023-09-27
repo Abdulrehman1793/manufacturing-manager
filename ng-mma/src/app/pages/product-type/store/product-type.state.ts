@@ -1,3 +1,4 @@
+import { FormState } from 'src/app/shared/store';
 import { Page, Search } from '../../../core/models';
 import { ProductType } from '../models/product-type';
 import {
@@ -7,7 +8,7 @@ import {
 
 export interface ProductTypeState {
   [PRODUCT_TYPE_CONTENT_STATE_NAME]: ProductTypeContentState;
-  [PRODUCT_TYPE_FORM_STATE_NAME]: any;
+  [PRODUCT_TYPE_FORM_STATE_NAME]: FormState<ProductType>;
 }
 
 export interface ProductTypeContentState {
