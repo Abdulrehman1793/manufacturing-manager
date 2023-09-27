@@ -56,21 +56,21 @@ export class HomeComponent implements OnInit {
   totalElements$: Observable<number> = of(0);
 
   constructor(
-    private uomStore: Store<ProductTypeState>,
+    private store: Store<ProductTypeState>,
     public dialog: MatDialog
   ) {
-    uomStore.dispatch(findPage({ search: initialContentState.search }));
+    store.dispatch(findPage({ search: initialContentState.search }));
   }
 
   ngOnInit(): void {
-    this.purchaseUnits$ = this.uomStore.select(purchaseUnits);
-    this.loading$ = this.uomStore.select(loading);
-    this.totalElements$ = this.uomStore.select(totalElements);
-    this.pageSize$ = this.uomStore.select(pageSize);
+    this.purchaseUnits$ = this.store.select(purchaseUnits);
+    this.loading$ = this.store.select(loading);
+    this.totalElements$ = this.store.select(totalElements);
+    this.pageSize$ = this.store.select(pageSize);
   }
 
   onSortAndPageUpdate(search: Search) {
-    this.uomStore.dispatch(findPage({ search }));
+    this.store.dispatch(findPage({ search }));
   }
 
   onCreate() {

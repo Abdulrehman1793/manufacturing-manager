@@ -5,7 +5,7 @@ export interface Page<T> {
   empty: boolean;
   first: boolean;
   last: boolean;
-  number: number;
+  page: number;
   numberOfElements: number;
   pageable: Pageable;
   size: number;

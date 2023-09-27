@@ -11,6 +11,7 @@ const state = createFeatureSelector<ProductTypeState>(PRODUCT_TYPE_STATE_NAME);
 export const content = createSelector(state, (state) => state.content);
 
 export const page = createSelector(content, (state) => state.page);
+export const search = createSelector(content, (state) => state.search);
 export const purchaseUnits = createSelector(
   content,
   (state) => state.page?.content || []

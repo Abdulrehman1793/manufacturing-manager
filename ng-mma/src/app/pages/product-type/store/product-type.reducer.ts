@@ -5,6 +5,7 @@ import {
   ProductTypeContentState,
   initialContentState,
 } from './product-type.state';
+import { Search } from 'src/app/core/models';
 
 const _reducer = createReducer(
   initialContentState,
@@ -13,9 +14,18 @@ const _reducer = createReducer(
     loading: true,
   })),
   on(Actions.findPageSuccess, (state, { page }) => {
+    let search: Search = {
+      action: 'page',
+      page: page.page,
+      sort: 'id',
+      pageSize: page.size,
+      direction: 'asc',
+    };
+
     return {
       ...state,
       page,
+      search,
       loading: false,
     };
   }),

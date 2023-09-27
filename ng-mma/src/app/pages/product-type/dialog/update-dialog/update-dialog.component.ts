@@ -10,7 +10,7 @@ import { submitted, submitting } from '../../store';
 import { submitForm } from '../../../../shared/store';
 import { ProductTypeService } from '../../services/product-type.service';
 import { ProductType } from '../../models/product-type';
-import { Observable, of } from 'rxjs';
+import { Observable, combineLatest, of } from 'rxjs';
 
 @Component({
   selector: 'app-update-dialog',
@@ -45,6 +45,12 @@ export class UpdateDialogComponent implements OnInit {
     }
     this.submitted$ = this.store.select(submitted);
     this.submitting$ = this.store.select(submitting);
+
+    combineLatest([this.submitted$, this.submitting$]).subscribe(
+      ([submitted, submitting]) => {
+        if (submitted && !submitting) this.onClose();
+      }
+    );
   }
 
   onSave() {
