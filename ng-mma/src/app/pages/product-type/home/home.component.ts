@@ -22,6 +22,7 @@ import {
 import { Search } from '../../../core/models';
 import { ProductType } from '../models/product-type';
 import { UpdateDialogComponent } from '../dialog/update-dialog/update-dialog.component';
+import { ConfirmationDialog } from 'src/app/shared/dialogs';
 
 @Component({
   selector: 'app-home',
@@ -78,9 +79,9 @@ export class HomeComponent implements OnInit {
       data: undefined,
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-    });
+    // dialogRef.afterClosed().subscribe((result) => {
+    //   console.log('The dialog was closed');
+    // });
   }
 
   onUpdate(productType: ProductType) {
@@ -88,8 +89,23 @@ export class HomeComponent implements OnInit {
       data: productType,
     });
 
+    // dialogRef.afterClosed().subscribe((result) => {
+    //   console.log('The dialog was closed');
+    // });
+  }
+
+  onDelete(productType: ProductType) {
+    const dialogRef = this.dialog.open(ConfirmationDialog, {
+      data: { title: productType.name },
+      disableClose: true,
+    });
+
+    dialogRef.beforeClosed().subscribe((data) => {
+      return false;
+    });
+
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
+      if (result) console.log('The dialog was closed');
     });
   }
 }

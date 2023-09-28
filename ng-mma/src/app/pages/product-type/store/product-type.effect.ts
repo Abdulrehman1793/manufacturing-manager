@@ -13,7 +13,7 @@ export class PurchaseUnitEffects {
     private _service: ProductTypeService
   ) {}
 
-  findAllIngredients$ = createEffect(() =>
+  findPage$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ProductTypeActions.findPage),
       switchMap(({ search }) =>
@@ -26,6 +26,18 @@ export class PurchaseUnitEffects {
               })
             )
           )
+        )
+      )
+    )
+  );
+
+  deleteRequest$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProductTypeActions.delete_request),
+      switchMap(({ productType }) =>
+        this._service.delete(productType.id).pipe(
+          map(() => ProductTypeActions.delete_success()),
+          catchError((error) => of(ProductTypeActions.delete_fail()))
         )
       )
     )

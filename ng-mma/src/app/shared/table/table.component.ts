@@ -35,6 +35,7 @@ export class TableComponent<T> implements OnInit, AfterViewInit {
 
   @Output() onAdd: EventEmitter<T> = new EventEmitter();
   @Output() onUpate: EventEmitter<T> = new EventEmitter();
+  @Output() onDelete: EventEmitter<T> = new EventEmitter();
 
   @Output() onSortAndPageUpdate: EventEmitter<Search> = new EventEmitter();
 
@@ -81,6 +82,10 @@ export class TableComponent<T> implements OnInit, AfterViewInit {
 
   update(t: T) {
     this.onUpate.emit(t);
+  }
+
+  delete(t: T) {
+    this.onDelete.emit(t);
   }
 }
 

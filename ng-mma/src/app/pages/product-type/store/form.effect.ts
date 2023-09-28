@@ -14,7 +14,7 @@ import { EMPTY, of } from 'rxjs';
 import * as FormAction from '../../../shared/store';
 import { SuccessHandlerService } from 'src/app/core/services/succes-handler.service';
 import { Store } from '@ngrx/store';
-import { ProductTypeState, initialContentState } from './product-type.state';
+import { ProductTypeState } from './product-type.state';
 import { findPage } from './product-type.action';
 import { search } from './product-type.selector';
 
