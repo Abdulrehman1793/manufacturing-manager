@@ -41,10 +41,10 @@ th {
   justify-content: center;
 }
 
-.edit-button {
+.action-button {
   display: none;
 }
 
-tr.mat-mdc-row:hover .edit-button {
+tr.mat-mdc-row:hover .action-button {
   display: inline-block;
 }
