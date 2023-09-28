@@ -44,6 +44,9 @@ export class TableComponent<T> implements OnInit, AfterViewInit {
 
   constructor() {}
 
+  rowHoverStates: boolean[] = [];
+  editButtonHoverStates: boolean[] = [];
+
   ngOnInit(): void {
     this.displayedColumns = this.columns.map((row) => row.columnDef);
     this.displayedColumns.push('actions');

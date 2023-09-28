@@ -37,6 +37,7 @@ export class UpdateDialogComponent implements OnInit {
   ) {
     dialogRef.addPanelClass('custom-dialog-container');
     dialogRef.updateSize('50%');
+    dialogRef.disableClose = true;
   }
 
   ngOnInit(): void {
