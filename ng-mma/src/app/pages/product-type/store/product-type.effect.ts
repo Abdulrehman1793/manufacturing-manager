@@ -30,16 +30,4 @@ export class PurchaseUnitEffects {
       )
     )
   );
-
-  deleteRequest$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(ProductTypeActions.delete_request),
-      switchMap(({ productType }) =>
-        this._service.delete(productType.id).pipe(
-          map(() => ProductTypeActions.delete_success()),
-          catchError((error) => of(ProductTypeActions.delete_fail()))
-        )
-      )
-    )
-  );
 }

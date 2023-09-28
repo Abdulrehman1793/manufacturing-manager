@@ -17,10 +17,3 @@ export const findPageFailure = createAction(
   props<{ error: string }>()
 );
 
-// delete actions
-export const delete_request = createAction(
-  '[Product Type] Delete request',
-  props<{ productType: ProductType }>()
-);
-export const delete_success = createAction('[Product Type] Delete Success');
-export const delete_fail = createAction('[Product Type] Delete Failure');
