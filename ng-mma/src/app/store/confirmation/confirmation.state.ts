@@ -1,13 +1,19 @@
-import { HttpErrorResponse } from '@angular/common/http';
+export enum ConfirmationStatus {
+  request,
+  success,
+  error,
+}
 
 export interface ConfirmationState {
   type: 'delete';
   loading: boolean;
-  error: HttpErrorResponse | undefined;
+  status: ConfirmationStatus;
+  message: any;
 }
 
 export const initialState: ConfirmationState = {
   type: 'delete',
   loading: false,
-  error: undefined,
+  status: ConfirmationStatus.request,
+  message: undefined,
 };

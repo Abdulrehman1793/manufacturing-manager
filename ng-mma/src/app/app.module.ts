@@ -13,7 +13,7 @@ import { EntityDataModule } from '@ngrx/data';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
-import { appReducer, entityConfig } from './store';
+import { ConfirmationEffects, appReducer, entityConfig } from './store';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +24,7 @@ import { appReducer, entityConfig } from './store';
     CoreModule,
     HttpClientModule,
     StoreModule.forRoot(appReducer, {}),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([ConfirmationEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, trace: true, traceLimit: 75 }),
     EntityDataModule.forRoot(entityConfig),
   ],

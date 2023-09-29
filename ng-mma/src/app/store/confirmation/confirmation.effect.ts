@@ -9,12 +9,12 @@ import * as ConfirmationActions from './confirmation.action';
 export class ConfirmationEffects {
   constructor(private actions$: Actions) {}
 
-  findPage$ = createEffect(() =>
+  request$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ConfirmationActions.confirmation_request),
       switchMap(({ confirmation }) =>
         confirmation().pipe(
-          map((page) => ConfirmationActions.confirmation_success()),
+          map(() => ConfirmationActions.confirmation_success()),
           catchError((error) =>
             of(ConfirmationActions.confirmation_fail({ error }))
           )

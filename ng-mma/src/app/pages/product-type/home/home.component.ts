@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { Observable, of } from 'rxjs';
+import { EMPTY, Observable, of } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -23,6 +23,7 @@ import { Search } from '../../../core/models';
 import { ProductType } from '../models/product-type';
 import { UpdateDialogComponent } from '../dialog/update-dialog/update-dialog.component';
 import { ConfirmationDialog } from 'src/app/shared/dialogs';
+import { ProductTypeService } from '../services/product-type.service';
 
 @Component({
   selector: 'app-home',
@@ -57,21 +58,24 @@ export class HomeComponent implements OnInit {
   totalElements$: Observable<number> = of(0);
 
   constructor(
-    private store: Store<ProductTypeState>,
-    public dialog: MatDialog
+    private _productTypeStore: Store<ProductTypeState>,
+    public dialog: MatDialog,
+    private _service: ProductTypeService
   ) {
-    store.dispatch(findPage({ search: initialContentState.search }));
+    _productTypeStore.dispatch(
+      findPage({ search: initialContentState.search })
+    );
   }
 
   ngOnInit(): void {
-    this.purchaseUnits$ = this.store.select(purchaseUnits);
-    this.loading$ = this.store.select(loading);
-    this.totalElements$ = this.store.select(totalElements);
-    this.pageSize$ = this.store.select(pageSize);
+    this.purchaseUnits$ = this._productTypeStore.select(purchaseUnits);
+    this.loading$ = this._productTypeStore.select(loading);
+    this.totalElements$ = this._productTypeStore.select(totalElements);
+    this.pageSize$ = this._productTypeStore.select(pageSize);
   }
 
   onSortAndPageUpdate(search: Search) {
-    this.store.dispatch(findPage({ search }));
+    this._productTypeStore.dispatch(findPage({ search }));
   }
 
   onCreate() {
@@ -96,16 +100,17 @@ export class HomeComponent implements OnInit {
 
   onDelete(productType: ProductType) {
     const dialogRef = this.dialog.open(ConfirmationDialog, {
-      data: { title: productType.name },
+      data: {
+        title: productType.name,
+        confirmation: () => this._service.delete(productType.id),
+      },
       disableClose: true,
     });
 
-    dialogRef.beforeClosed().subscribe((data) => {
-      return false;
-    });
-
     dialogRef.afterClosed().subscribe((result) => {
-      if (result) console.log('The dialog was closed');
+      if (result) {
+        // TODO: Implement after action
+      }
     });
   }
 }
