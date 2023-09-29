@@ -24,7 +24,8 @@ const _reducer = createReducer(
     status: ConfirmationStatus.error,
     loading: false,
     failure: error,
-  }))
+  })),
+  on(Actions.confirmation_reset, (_) => ({ ...initialState }))
 );
 
 export function confirmationReducer(
