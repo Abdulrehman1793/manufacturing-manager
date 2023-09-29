@@ -30,3 +30,4 @@ export const form = createSelector(state, (state) => state.form);
 
 export const submitted = createSelector(form, (state) => state.submitted);
 export const submitting = createSelector(form, (state) => state.submitting);
+export const formId = createSelector(form, (state) => state.id);

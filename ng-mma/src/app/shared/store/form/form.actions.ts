@@ -14,3 +14,4 @@ export const submitFormFailure = createAction(
   '[Form] Submit Form Failure',
   props<{ error: string }>()
 );
+export const resetForm = createAction('[Form] Reset Form');

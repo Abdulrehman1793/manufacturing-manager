@@ -21,5 +21,6 @@ export const formReducer = createReducer(
     ...state,
     submitting: false,
     error,
-  }))
+  })),
+  on(FormActions.resetForm, (state) => ({ ...initialFormState }))
 );

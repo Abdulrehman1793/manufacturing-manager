@@ -5,12 +5,12 @@ import { Store } from '@ngrx/store';
 
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
-import { submitted, submitting } from '../../store';
+import { formId, submitted, submitting } from '../../store';
 
 import { submitForm } from '../../../../shared/store';
 import { ProductTypeService } from '../../services/product-type.service';
 import { ProductType } from '../../models/product-type';
-import { Observable, combineLatest, of } from 'rxjs';
+import { EMPTY, Observable, combineLatest, of } from 'rxjs';
 
 @Component({
   selector: 'app-update-dialog',
@@ -21,6 +21,7 @@ import { Observable, combineLatest, of } from 'rxjs';
 export class UpdateDialogComponent implements OnInit {
   submitting$: Observable<boolean> = of(false);
   submitted$: Observable<boolean> = of(false);
+  formId$: Observable<string | null> = EMPTY;
 
   form = this.fb.group({
     name: ['', [Validators.required, Validators.maxLength(50)]],
@@ -46,10 +47,11 @@ export class UpdateDialogComponent implements OnInit {
     }
     this.submitted$ = this.store.select(submitted);
     this.submitting$ = this.store.select(submitting);
+    this.formId$ = this.store.select(formId);
 
-    combineLatest([this.submitted$, this.submitting$]).subscribe(
-      ([submitted, submitting]) => {
-        if (submitted && !submitting) this.onClose();
+    combineLatest([this.submitted$, this.submitting$, this.formId$]).subscribe(
+      ([submitted, submitting, formId]) => {
+        if (formId != null && submitted && !submitting) this.onClose();
       }
     );
   }

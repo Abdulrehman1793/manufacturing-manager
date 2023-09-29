@@ -50,6 +50,7 @@ export class PurchaseUnitFormEffects {
         withLatestFrom(this.store.select(search)),
         tap(([, search]) => {
           this.store.dispatch(findPage({ search }));
+          this.store.dispatch(FormAction.resetForm());
         })
       ),
     { dispatch: false }
