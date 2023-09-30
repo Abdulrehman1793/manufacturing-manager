@@ -30,7 +30,6 @@ import { FormState, formReducer } from 'src/app/shared/store/form';
 import { ProductTypeState } from './store/product-type.state';
 import { ProductType } from './models/product-type';
 import { ProductTypeService } from './services/product-type.service';
-import { ConfirmationEffects } from 'src/app/store';
 
 const reducers: ActionReducerMap<ProductTypeState> = {
   [PRODUCT_TYPE_CONTENT_STATE_NAME]: reducer,
@@ -62,4 +61,6 @@ const reducers: ActionReducerMap<ProductTypeState> = {
   ],
   providers: [ProductTypeService],
 })
-export class ProductTypeModule {}
+export class ProductTypeModule {
+  constructor() {}
+}

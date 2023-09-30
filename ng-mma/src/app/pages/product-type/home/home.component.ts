@@ -26,6 +26,8 @@ import { UpdateDialogComponent } from '../dialog/update-dialog/update-dialog.com
 import { ConfirmationDialog } from 'src/app/shared/dialogs';
 import { ProductTypeService } from '../services/product-type.service';
 import { SuccessHandlerService } from 'src/app/core/services/succes-handler.service';
+import { AppState } from 'src/app/store';
+import { dropdown_request } from 'src/app/store/dropdown';
 
 @Component({
   selector: 'app-home',
@@ -60,11 +62,13 @@ export class HomeComponent implements OnInit {
   totalElements$: Observable<number> = of(0);
 
   constructor(
+    private _store: Store<AppState>,
     private _productTypeStore: Store<ProductTypeState>,
     public dialog: MatDialog,
     private _service: ProductTypeService,
     private _successService: SuccessHandlerService
   ) {
+    _productTypeStore.dispatch(dropdown_request({ keys: ['ProductType'] }));
     _productTypeStore.dispatch(
       findPage({ search: initialContentState.search })
     );
