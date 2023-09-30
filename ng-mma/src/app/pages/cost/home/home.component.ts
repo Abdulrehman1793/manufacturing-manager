@@ -29,11 +29,13 @@ export class HomeComponent implements OnInit {
       columnDef: 'name',
       title: 'Name',
       sort: true,
+      direction: 'asc',
     },
     {
       columnDef: 'type',
       title: 'Type',
       sort: false,
+      lookup: 'name',
     },
     {
       columnDef: 'description',

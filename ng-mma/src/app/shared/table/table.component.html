@@ -21,7 +21,11 @@
           {{ column.title }}
         </th>
         <td mat-cell *matCellDef="let row">
-          {{ row[column.columnDef] }}
+          {{
+            column.lookup
+              ? row[column.columnDef][column.lookup]
+              : row[column.columnDef]
+          }}
         </td>
       </ng-container>
 

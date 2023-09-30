@@ -110,6 +110,7 @@ export interface CustomColumn {
   sort: boolean;
   title: string;
   direction?: 'asc' | 'desc';
+  lookup?: string;
 }
 
 export interface DeleteEventData<T> {
