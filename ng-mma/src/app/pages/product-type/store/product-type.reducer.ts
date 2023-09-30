@@ -14,13 +14,16 @@ const _reducer = createReducer(
     loading: true,
   })),
   on(Actions.findPageSuccess, (state, { page }) => {
+    const sort: any = page.sort;
+
     let search: Search = {
       action: 'page',
       page: page.page,
-      sort: 'id',
+      sort: sort[0].property,
       pageSize: page.size,
-      direction: 'asc',
+      direction: sort[0].direction,
     };
+    console.log('Reducer....', page);
 
     return {
       ...state,

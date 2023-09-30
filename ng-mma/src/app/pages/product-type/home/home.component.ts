@@ -32,7 +32,7 @@ import { ProductTypeService } from '../services/product-type.service';
 })
 export class HomeComponent implements OnInit {
   customColumns: CustomColumn[] = [
-    { columnDef: 'id', sort: false, title: 'Id' },
+    { columnDef: 'id', sort: true, title: 'Id' },
     {
       columnDef: 'name',
       title: 'Name',

@@ -9,10 +9,10 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { Search } from '../model';
 import { tableMaterialModules } from './material.module';
-import { Observable, of } from 'rxjs';
+import { Observable, merge, of } from 'rxjs';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -64,6 +64,16 @@ export class TableComponent<T> implements OnInit, AfterViewInit {
     this.paginator.page.subscribe((_) => {
       this.onSortAndPageUpdate.emit(this.getSortAndPage('page'));
     });
+
+    // merge(this.sort.sortChange, this.paginator.page).subscribe((event) => {
+    //   // If it's a sortChange event, reset the pageIndex to 0
+    //   this.paginator.pageIndex = 0;
+
+    //   console.log(this.getSortAndPage('sort'));
+
+    //   // Get the updated sort direction and emit the event
+    //   this.onSortAndPageUpdate.emit(this.getSortAndPage('sort'));
+    // });
   }
 
   getSortAndPage(action: 'sort' | 'page'): Search {
