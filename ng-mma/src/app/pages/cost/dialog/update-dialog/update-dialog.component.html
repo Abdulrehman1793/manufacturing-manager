@@ -1,0 +1,54 @@
+<h1 mat-dialog-title>Add New Purchase Unit</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form">
+    <!-- Name -->
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input
+        matInput
+        placeholder="Enter the name of the product type"
+        formControlName="name"
+      />
+      <mat-error *ngIf="form.controls.name.hasError('required')"
+        >Name is required</mat-error
+      >
+      <mat-error *ngIf="form.controls.name.hasError('maxlength')"
+        >Name should be less than 50 characters</mat-error
+      >
+    </mat-form-field>
+
+    <!-- Description -->
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        placeholder="Enter the detail about product type"
+        formControlName="description"
+      ></textarea>
+      <mat-error *ngIf="form.controls.name.hasError('maxlength')"
+        >Description should be less than 250 characters</mat-error
+      >
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button
+    mat-button
+    color="warn"
+    [disabled]="(submitting$ | async) && !(submitted$ | async)"
+    cdkFocusInitial
+    (click)="onClose()"
+  >
+    Close
+  </button>
+  <button
+    mat-button
+    color="primary"
+    [disabled]="
+      ((submitting$ | async) && !(submitted$ | async)) || form.invalid
+    "
+    (click)="onSave()"
+  >
+    Save
+  </button>
+</div>
