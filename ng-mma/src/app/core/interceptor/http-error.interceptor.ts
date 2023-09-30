@@ -5,6 +5,7 @@ import {
   HttpEvent,
   HttpInterceptor,
   HttpErrorResponse,
+  HttpStatusCode,
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -21,7 +22,14 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status) {
-          this.errorHandlerService.handleValidationError(error);
+          switch (error.status) {
+            case HttpStatusCode.BadRequest:
+              this.errorHandlerService.badRequestError(error);
+              break;
+            default:
+              this.errorHandlerService.handleValidationError(error);
+              break;
+          }
         } else {
           this.errorHandlerService.handleError(error);
         }

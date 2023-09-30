@@ -24,4 +24,8 @@ export class ErrorHandlerService {
 
     this._snackBar.open(message, 'Error', { duration: 9 * 1000 });
   }
+
+  badRequestError(error: HttpErrorResponse): void {
+    this._snackBar.open(error.error.message, 'Error', { duration: 5 * 1000 });
+  }
 }
