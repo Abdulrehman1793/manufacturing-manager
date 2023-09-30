@@ -56,10 +56,9 @@ public class ProductTypeServiceImpl implements ProductTypeService {
         if (newData.equals(productType))
             throw new BadRequestException("Product type could not be found");
 
-        productType.setName(productType.getName());
-        productType.setDescription(productType.getDescription());
-        productType.setType(productType.getType());
-
+        productType.setName(newData.getName());
+        productType.setDescription(newData.getDescription());
+        productType.setType(newData.getType());
 
         productTypeRepository.save(productType);
     }

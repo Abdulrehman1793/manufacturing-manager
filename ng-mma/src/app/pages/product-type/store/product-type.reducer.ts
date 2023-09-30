@@ -23,8 +23,6 @@ const _reducer = createReducer(
       pageSize: page.size,
       direction: sort[0].direction,
     };
-    console.log('Reducer....', page);
-
     return {
       ...state,
       page,

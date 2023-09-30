@@ -7,15 +7,7 @@
   </div>
 
   <div class="table-container">
-    <table
-      matSort
-      mat-table
-      [dataSource]="rows$"
-      matSort
-      matSortActive="id"
-      matSortDisableClear
-      matSortDirection="asc"
-    >
+    <table matSort mat-table [dataSource]="rows$" matSort matSortDisableClear>
       <ng-container
         *ngFor="let column of columns"
         [matColumnDef]="column.columnDef"
@@ -24,7 +16,6 @@
           mat-header-cell
           *matHeaderCellDef
           [mat-sort-header]="column.columnDef"
-          disableClear="true"
           [disabled]="!column.sort || (loading$ | async) || error"
         >
           {{ column.title }}

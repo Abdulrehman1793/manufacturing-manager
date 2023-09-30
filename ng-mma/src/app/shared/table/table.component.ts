@@ -6,13 +6,15 @@ import {
   OnInit,
   Output,
   EventEmitter,
+  ChangeDetectorRef,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort, Sort } from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
 import { Search } from '../model';
 import { tableMaterialModules } from './material.module';
-import { Observable, merge, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -21,6 +23,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [CommonModule, ReactiveFormsModule, tableMaterialModules],
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableComponent<T> implements OnInit, AfterViewInit {
   @Input() columns: CustomColumn[] = [];
@@ -43,7 +46,7 @@ export class TableComponent<T> implements OnInit, AfterViewInit {
 
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor() {}
+  constructor(private cdr: ChangeDetectorRef) {}
 
   rowHoverStates: boolean[] = [];
   editButtonHoverStates: boolean[] = [];
@@ -54,6 +57,18 @@ export class TableComponent<T> implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    const firstSortableColumn = this.columns.find(
+      (column) => column.sort === true
+    );
+    if (firstSortableColumn) {
+      this.sort.sort({
+        id: firstSortableColumn.columnDef,
+        start: firstSortableColumn.direction || 'asc',
+        disableClear: false,
+      });
+    } else {
+    }
+
     this.sort.sortChange.subscribe(() => {
       // If the user changes the sort order, reset back to the first page.
       this.paginator.pageIndex = 0;
@@ -64,16 +79,7 @@ export class TableComponent<T> implements OnInit, AfterViewInit {
     this.paginator.page.subscribe((_) => {
       this.onSortAndPageUpdate.emit(this.getSortAndPage('page'));
     });
-
-    // merge(this.sort.sortChange, this.paginator.page).subscribe((event) => {
-    //   // If it's a sortChange event, reset the pageIndex to 0
-    //   this.paginator.pageIndex = 0;
-
-    //   console.log(this.getSortAndPage('sort'));
-
-    //   // Get the updated sort direction and emit the event
-    //   this.onSortAndPageUpdate.emit(this.getSortAndPage('sort'));
-    // });
+    this.cdr.detectChanges();
   }
 
   getSortAndPage(action: 'sort' | 'page'): Search {
@@ -103,4 +109,5 @@ export interface CustomColumn {
   columnDef: string;
   sort: boolean;
   title: string;
+  direction?: 'asc' | 'desc';
 }

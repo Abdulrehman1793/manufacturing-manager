@@ -26,7 +26,7 @@ export class UpdateDialogComponent implements OnInit {
   form = this.fb.group({
     name: ['', [Validators.required, Validators.maxLength(50)]],
     description: ['', [Validators.maxLength(250)]],
-    type: ['', [Validators.required]],
+    type: ['others', [Validators.required]],
   });
 
   constructor(

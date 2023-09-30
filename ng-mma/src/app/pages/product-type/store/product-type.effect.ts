@@ -16,10 +16,8 @@ export class PurchaseUnitEffects {
   findPage$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ProductTypeActions.findPage),
-      switchMap(({ search }) => {
-        console.log(search);
-
-        return this._service.findPage(search).pipe(
+      switchMap(({ search }) =>
+        this._service.findPage(search).pipe(
           map((page) => ProductTypeActions.findPageSuccess({ page })),
           catchError((error) =>
             of(
@@ -28,8 +26,8 @@ export class PurchaseUnitEffects {
               })
             )
           )
-        );
-      })
+        )
+      )
     )
   );
 }

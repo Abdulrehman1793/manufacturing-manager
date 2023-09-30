@@ -19,11 +19,18 @@
 
     <!-- Name -->
     <div>
-      <label>Goods type: </label>
-      <mat-radio-group color="primary" formControlName="type">
+      <mat-label>Goods type: </mat-label>
+      <mat-radio-group color="primary" formControlName="type" required>
         <mat-radio-button value="raw" checked>Raw goods</mat-radio-button>
         <mat-radio-button value="finished">Finished product</mat-radio-button>
         <mat-radio-button value="others">Others</mat-radio-button>
+        <mat-error
+          *ngIf="
+            form.controls.type.hasError('required') &&
+            form.controls.type.touched
+          "
+          >Product type is required</mat-error
+        >
       </mat-radio-group>
     </div>
 
@@ -46,6 +53,7 @@
     mat-button
     color="warn"
     [disabled]="(submitting$ | async) && !(submitted$ | async)"
+    cdkFocusInitial
     (click)="onClose()"
   >
     Close
@@ -53,9 +61,10 @@
   <button
     mat-button
     color="primary"
-    [disabled]="(submitting$ | async) && !(submitted$ | async)"
+    [disabled]="
+      ((submitting$ | async) && !(submitted$ | async)) || form.invalid
+    "
     (click)="onSave()"
-    cdkFocusInitial
   >
     Save
   </button>
