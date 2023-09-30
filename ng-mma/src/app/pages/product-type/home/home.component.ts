@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { EMPTY, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -86,9 +86,15 @@ export class HomeComponent implements OnInit {
       data: undefined,
     });
 
-    // dialogRef.afterClosed().subscribe((result) => {
-    //   console.log('The dialog was closed');
-    // });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this._successService.snackBar(
+          `New product type created successfully`,
+          'Added',
+          ''
+        );
+      }
+    });
   }
 
   onUpdate(productType: ProductType) {
@@ -96,9 +102,15 @@ export class HomeComponent implements OnInit {
       data: productType,
     });
 
-    // dialogRef.afterClosed().subscribe((result) => {
-    //   console.log('The dialog was closed');
-    // });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this._successService.snackBar(
+          `Product type "${productType.name}" updated successfully`,
+          'Updated',
+          ''
+        );
+      }
+    });
   }
 
   onDelete(eventData: DeleteEventData<ProductType>) {

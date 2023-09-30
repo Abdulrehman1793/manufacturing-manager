@@ -51,7 +51,8 @@ export class UpdateDialogComponent implements OnInit {
 
     combineLatest([this.submitted$, this.submitting$, this.formId$]).subscribe(
       ([submitted, submitting, formId]) => {
-        if (formId != null && submitted && !submitting) this.onClose();
+        if (formId != null && submitted && !submitting)
+          this.dialogRef.close(true);
       }
     );
   }
@@ -73,6 +74,6 @@ export class UpdateDialogComponent implements OnInit {
   }
 
   onClose() {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 }
