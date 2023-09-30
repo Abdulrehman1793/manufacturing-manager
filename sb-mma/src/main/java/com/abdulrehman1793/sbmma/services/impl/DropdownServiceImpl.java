@@ -7,9 +7,7 @@ import com.abdulrehman1793.sbmma.web.util.DropdownName;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -18,8 +16,8 @@ public class DropdownServiceImpl implements DropdownService {
     private final ProductTypeRepository productTypeRepository;
 
     @Override
-    public List<DropdownResponse> process(String... dropdowns) {
-        List<DropdownResponse> result = new ArrayList<>();
+    public HashMap<String, DropdownResponse> process(String... dropdowns) {
+        HashMap<String, DropdownResponse> result = new HashMap<>();
 
         for (String dropdown : dropdowns) {
             boolean isNotInEnum = EnumSet.allOf(DropdownName.class)
@@ -29,15 +27,13 @@ public class DropdownServiceImpl implements DropdownService {
             DropdownResponse dropdownResponse = new DropdownResponse();
 
             if (isNotInEnum) {
-                dropdownResponse.setKey(dropdown);
                 dropdownResponse.setError("Not found");
             } else {
                 if (DropdownName.valueOf(dropdown) == DropdownName.ProductType) {
-                    dropdownResponse.setKey(DropdownName.ProductType.name());
                     dropdownResponse.setContent(productTypeRepository.findAllProductTypeKeyValue());
                 }
             }
-            result.add(dropdownResponse);
+            result.put(dropdown, dropdownResponse);
         }
 
         return result;
