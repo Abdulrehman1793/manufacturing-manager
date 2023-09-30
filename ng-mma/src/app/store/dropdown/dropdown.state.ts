@@ -1,12 +1,12 @@
 import { KeyValuePair } from 'src/app/core/models/keyvalue-pair';
 
 export interface DropdownState {
-  productType: { content: KeyValuePair[]; error?: string };
+  ProductType: { content: KeyValuePair[]; error?: string };
   loading: boolean;
   error?: string;
 }
 
 export const initialState: DropdownState = {
-  productType: { content: [] },
+  ProductType: { content: [] },
   loading: false,
 };

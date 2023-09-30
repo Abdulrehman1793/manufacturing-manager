@@ -10,16 +10,16 @@ const _reducer = createReducer(
     loading: true,
   })),
   on(Actions.dropdown_success, (state, { data }) => {
-    console.log(data);
-
     return {
       ...state,
+      ...data,
       loading: false,
     };
   }),
   on(Actions.dropdown_fail, (state, { error }) => ({
     ...state,
     loading: false,
+    error: error.error,
   }))
 );
 
