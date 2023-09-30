@@ -17,6 +17,7 @@ import {
 } from '../store';
 import {
   CustomColumn,
+  DeleteEventData,
   TableComponent,
 } from '../../../shared/table/table.component';
 import { Search } from '../../../core/models';
@@ -24,6 +25,7 @@ import { ProductType } from '../models/product-type';
 import { UpdateDialogComponent } from '../dialog/update-dialog/update-dialog.component';
 import { ConfirmationDialog } from 'src/app/shared/dialogs';
 import { ProductTypeService } from '../services/product-type.service';
+import { SuccessHandlerService } from 'src/app/core/services/succes-handler.service';
 
 @Component({
   selector: 'app-home',
@@ -60,7 +62,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private _productTypeStore: Store<ProductTypeState>,
     public dialog: MatDialog,
-    private _service: ProductTypeService
+    private _service: ProductTypeService,
+    private _successService: SuccessHandlerService
   ) {
     _productTypeStore.dispatch(
       findPage({ search: initialContentState.search })
@@ -98,7 +101,9 @@ export class HomeComponent implements OnInit {
     // });
   }
 
-  onDelete(productType: ProductType) {
+  onDelete(eventData: DeleteEventData<ProductType>) {
+    const productType = eventData.data;
+    const search = eventData.search;
     const dialogRef = this.dialog.open(ConfirmationDialog, {
       data: {
         title: productType.name,
@@ -109,7 +114,12 @@ export class HomeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        // TODO: Implement after action
+        this._successService.snackBar(
+          `Product type "${productType.name}" deleted successfully`,
+          'Deleted',
+          ''
+        );
+        this._productTypeStore.dispatch(findPage({ search }));
       }
     });
   }

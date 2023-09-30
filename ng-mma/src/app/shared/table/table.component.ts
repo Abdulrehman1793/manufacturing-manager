@@ -38,7 +38,7 @@ export class TableComponent<T> implements OnInit, AfterViewInit {
 
   @Output() onAdd: EventEmitter<T> = new EventEmitter();
   @Output() onUpate: EventEmitter<T> = new EventEmitter();
-  @Output() onDelete: EventEmitter<T> = new EventEmitter();
+  @Output() onDelete: EventEmitter<DeleteEventData<T>> = new EventEmitter();
 
   @Output() onSortAndPageUpdate: EventEmitter<Search> = new EventEmitter();
 
@@ -101,7 +101,7 @@ export class TableComponent<T> implements OnInit, AfterViewInit {
   }
 
   delete(t: T) {
-    this.onDelete.emit(t);
+    this.onDelete.emit({ data: t, search: this.getSortAndPage('page') });
   }
 }
 
@@ -110,4 +110,9 @@ export interface CustomColumn {
   sort: boolean;
   title: string;
   direction?: 'asc' | 'desc';
+}
+
+export interface DeleteEventData<T> {
+  data: T; // Your main data
+  search: Search; // Other data you want to pass
 }
