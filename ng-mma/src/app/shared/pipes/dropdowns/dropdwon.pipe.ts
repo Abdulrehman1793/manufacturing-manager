@@ -7,6 +7,6 @@ import { KeyValuePair } from 'src/app/core/models';
 })
 export class DropdownPipe implements PipeTransform {
   transform(value: unknown, content: KeyValuePair[] | null): unknown {
-    return content?.filter((row) => row.key === value)[0].value;
+    return value ? content?.filter((row) => row.key === value)[0].value : '';
   }
 }
