@@ -11,6 +11,9 @@ import { submitForm } from '../../../../shared/store';
 import { CostService } from '../../services/cost.service';
 import { Cost } from '../../models/cost';
 import { EMPTY, Observable, combineLatest, of } from 'rxjs';
+import { ProductType } from 'src/app/pages/product-type/models/product-type';
+import { PRODUCTTYPE } from 'src/app/store/dropdown';
+import { KeyValuePair } from 'src/app/core/models';
 
 @Component({
   selector: 'app-update-dialog',
@@ -25,8 +28,13 @@ export class UpdateDialogComponent implements OnInit {
 
   form = this.fb.group({
     name: ['', [Validators.required, Validators.maxLength(50)]],
-    description: ['', [Validators.maxLength(250)]],
+    description: ['', [Validators.maxLength(500)]],
+    type: [''],
+    costUnit: ['', [Validators.maxLength(50)]],
+    amount: [0],
   });
+
+  productTypes$: Observable<KeyValuePair[]> = EMPTY;
 
   constructor(
     public dialogRef: MatDialogRef<UpdateDialogComponent>,
@@ -41,6 +49,7 @@ export class UpdateDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.productTypes$ = this.store.select(PRODUCTTYPE);
     if (this.data && this.data.id) {
       this.form.patchValue(this.data);
     }

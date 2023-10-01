@@ -16,11 +16,21 @@ import { Search } from '../model';
 import { tableMaterialModules } from './material.module';
 import { Observable, of } from 'rxjs';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MemoizedSelector, Store } from '@ngrx/store';
+import { AppState } from 'src/app/store';
+import { DropdownState } from 'src/app/store/dropdown';
+import { KeyValuePair } from 'src/app/core/models';
+import { DropdownPipe } from '../pipes';
 
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, tableMaterialModules],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    tableMaterialModules,
+    DropdownPipe,
+  ],
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -46,13 +56,25 @@ export class TableComponent<T> implements OnInit, AfterViewInit {
 
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private dropdownStore: Store<DropdownState>
+  ) {}
 
   rowHoverStates: boolean[] = [];
   editButtonHoverStates: boolean[] = [];
 
+  lookups: any = {};
+
   ngOnInit(): void {
-    this.displayedColumns = this.columns.map((row) => row.columnDef);
+    this.displayedColumns = this.columns.map((row) => {
+      if (row.lookup != null) {
+        this.lookups[row.lookup.toString()] = this.dropdownStore.select(
+          row.lookup
+        );
+      }
+      return row.columnDef;
+    });
     this.displayedColumns.push('actions');
   }
 
@@ -110,7 +132,11 @@ export interface CustomColumn {
   sort: boolean;
   title: string;
   direction?: 'asc' | 'desc';
-  lookup?: string;
+  lookup?: MemoizedSelector<
+    DropdownState,
+    KeyValuePair[],
+    (s1: DropdownState) => KeyValuePair[]
+  >;
 }
 
 export interface DeleteEventData<T> {

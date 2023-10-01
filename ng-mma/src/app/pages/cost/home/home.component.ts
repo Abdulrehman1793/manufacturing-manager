@@ -17,6 +17,8 @@ import { UpdateDialogComponent } from '../dialog/update-dialog/update-dialog.com
 import { ConfirmationDialog } from 'src/app/shared/dialogs';
 import { CostService } from '../services/cost.service';
 import { SuccessHandlerService } from 'src/app/core/services/succes-handler.service';
+import { AppState } from 'src/app/store';
+import { PRODUCTTYPE, dropdown_request } from 'src/app/store/dropdown';
 
 @Component({
   selector: 'app-home',
@@ -32,14 +34,24 @@ export class HomeComponent implements OnInit {
       direction: 'asc',
     },
     {
+      columnDef: 'description',
+      title: 'Description',
+      sort: false,
+    },
+    {
       columnDef: 'type',
       title: 'Type',
       sort: false,
-      lookup: 'name',
+      lookup: PRODUCTTYPE,
     },
     {
-      columnDef: 'description',
-      title: 'Description',
+      columnDef: 'costUnit',
+      title: 'Cost Unit',
+      sort: false,
+    },
+    {
+      columnDef: 'amount',
+      title: 'Amount',
       sort: false,
     },
   ];
@@ -53,10 +65,12 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private _productTypeStore: Store<CostState>,
+    private _store: Store<AppState>,
     public dialog: MatDialog,
     private _service: CostService,
     private _successService: SuccessHandlerService
   ) {
+    _store.dispatch(dropdown_request({ keys: ['ProductType'] }));
     _productTypeStore.dispatch(
       findPage({ search: initialContentState.search })
     );

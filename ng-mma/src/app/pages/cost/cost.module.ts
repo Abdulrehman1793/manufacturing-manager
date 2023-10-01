@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
 
 import { TableComponent } from '../../shared/table/table.component';
 import { ProductTypeRoutingModule } from './cost-routing.module';
@@ -55,6 +56,7 @@ const reducers: ActionReducerMap<CostState> = {
     MatDialogModule,
     MatSnackBarModule,
     MatRadioModule,
+    MatSelectModule,
     TableComponent,
     StoreModule.forFeature(COST_STATE_NAME, reducers),
     EffectsModule.forFeature([CostEffects, CostFormEffects]),

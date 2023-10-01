@@ -14,7 +14,7 @@ public class CostDto {
     private String name;
     @Size(max = 500)
     private String description;
-    private ProductTypeDto type;
+    private String type;
     @Size(max = 50)
     private String costUnit;
     private double amount;

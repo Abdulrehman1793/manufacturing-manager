@@ -4,7 +4,7 @@ export interface Cost {
   id: number;
   name: string;
   description: string;
-  type: ProductType;
-  costUnit: number;
+  type: string;
+  costUnit: string;
   amount: number;
 }

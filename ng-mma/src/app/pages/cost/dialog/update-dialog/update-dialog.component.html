@@ -6,7 +6,7 @@
       <mat-label>Name</mat-label>
       <input
         matInput
-        placeholder="Enter the name of the product type"
+        placeholder="Enter the name of the cost"
         formControlName="name"
       />
       <mat-error *ngIf="form.controls.name.hasError('required')"
@@ -22,12 +22,24 @@
       <mat-label>Description</mat-label>
       <textarea
         matInput
-        placeholder="Enter the detail about product type"
+        placeholder="Enter the detail about cost"
         formControlName="description"
       ></textarea>
       <mat-error *ngIf="form.controls.name.hasError('maxlength')"
         >Description should be less than 250 characters</mat-error
       >
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Product Type</mat-label>
+      <mat-select formControlName="type">
+        <mat-option
+          *ngFor="let productType of productTypes$ | async"
+          [value]="productType.key"
+        >
+          {{ productType.value }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
   </form>
 </div>
