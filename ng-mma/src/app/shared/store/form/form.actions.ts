@@ -1,4 +1,5 @@
 // generic-form.actions.ts
+import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
@@ -12,6 +13,6 @@ export const submitFormSuccess = createAction(
 );
 export const submitFormFailure = createAction(
   '[Form] Submit Form Failure',
-  props<{ error: string }>()
+  props<{ error: HttpErrorResponse }>()
 );
 export const resetForm = createAction('[Form] Reset Form');

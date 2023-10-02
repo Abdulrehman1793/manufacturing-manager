@@ -1,9 +1,11 @@
+import { HttpErrorResponse } from '@angular/common/http';
+
 export interface FormState<T> {
   data: T;
   id: string | null;
   submitting: boolean;
   submitted: boolean;
-  error: string | null;
+  error: HttpErrorResponse | null;
 }
 
 export const initialFormState: FormState<any> = {

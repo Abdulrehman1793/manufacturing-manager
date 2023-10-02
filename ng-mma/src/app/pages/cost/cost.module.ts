@@ -31,6 +31,7 @@ import { FormState, formReducer } from 'src/app/shared/store/form';
 import { CostState } from './store/cost.state';
 import { Cost } from './models/cost';
 import { CostService } from './services/cost.service';
+import { FormErrorPipe } from 'src/app/shared/pipes';
 
 const reducers: ActionReducerMap<CostState> = {
   [COST_CONTENT_STATE_NAME]: reducer,
@@ -43,7 +44,7 @@ const reducers: ActionReducerMap<CostState> = {
 };
 
 @NgModule({
-  declarations: [HomeComponent, UpdateDialogComponent],
+  declarations: [HomeComponent, UpdateDialogComponent, FormErrorPipe],
   imports: [
     CommonModule,
     ReactiveFormsModule,

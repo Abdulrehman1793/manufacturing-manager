@@ -28,8 +28,8 @@ export class UpdateDialogComponent implements OnInit {
   error$: Observable<any> = EMPTY;
 
   form = this.fb.group({
-    name: ['', ],
-    description: ['', ],
+    name: ['', [Validators.required, Validators.maxLength(50)]],
+    description: ['', [Validators.maxLength(500)]],
     type: [''],
     costUnit: ['', [Validators.maxLength(50)]],
     amount: [0],

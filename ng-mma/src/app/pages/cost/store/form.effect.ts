@@ -30,22 +30,22 @@ export class CostFormEffects {
             return FormAction.submitFormSuccess({ data });
           }),
           catchError((error: HttpErrorResponse) => {
-            if (error.status === HttpStatusCode.UnprocessableEntity) {
-              let errors: { field: string; message: string }[] =
-                error.error.errors;
+            // if (error.status === HttpStatusCode.UnprocessableEntity) {
+            //   let errors: { field: string; message: string }[] =
+            //     error.error.errors;
 
-              let result = errors.map((row) => {
-                return `${row.field.toUpperCase()} ${row.message}`;
-              });
+            //   let result = errors.map((row) => {
+            //     return `${row.field.toUpperCase()} ${row.message}`;
+            //   });
 
-              console.log(result);
+            //   console.log(result);
 
-              return of(
-                FormAction.submitFormFailure({ error: error.error.errors })
-              );
-            }
+            //   return of(
+            //     FormAction.submitFormFailure({ error: error.error.errors })
+            //   );
+            // }
 
-            return of(FormAction.submitFormFailure({ error: error.error }));
+            return of(FormAction.submitFormFailure({ error }));
           })
         );
       })

@@ -6,3 +6,8 @@ mat-form-field {
 .mdc-dialog__header + .mdc-dialog__content {
   padding-top: 12px;
 }
+
+.form-error{
+  font-size: small;
+  color: var(--color-error);
+}
