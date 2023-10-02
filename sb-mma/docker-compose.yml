@@ -6,7 +6,7 @@ services:
       POSTGRES_USER: abdulrehman
       POSTGRES_PASSWORD: Abdulrehman#1
       PGDATA: /data/postgres
-      POSTGRES_DB: mma
+      POSTGRES_DB: sb-mma
     volumes:
       - postgres:/data/postgres
     ports:
