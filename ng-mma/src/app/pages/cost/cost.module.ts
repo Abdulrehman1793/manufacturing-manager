@@ -31,7 +31,7 @@ import { FormState, formReducer } from 'src/app/shared/store/form';
 import { CostState } from './store/cost.state';
 import { Cost } from './models/cost';
 import { CostService } from './services/cost.service';
-import { FormErrorPipe } from 'src/app/shared/pipes';
+import { SharedModule } from '../../shared/shared.module';
 
 const reducers: ActionReducerMap<CostState> = {
   [COST_CONTENT_STATE_NAME]: reducer,
@@ -44,7 +44,7 @@ const reducers: ActionReducerMap<CostState> = {
 };
 
 @NgModule({
-  declarations: [HomeComponent, UpdateDialogComponent, FormErrorPipe],
+  declarations: [HomeComponent, UpdateDialogComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -59,6 +59,7 @@ const reducers: ActionReducerMap<CostState> = {
     MatRadioModule,
     MatSelectModule,
     TableComponent,
+    SharedModule,
     StoreModule.forFeature(COST_STATE_NAME, reducers),
     EffectsModule.forFeature([CostEffects, CostFormEffects]),
   ],

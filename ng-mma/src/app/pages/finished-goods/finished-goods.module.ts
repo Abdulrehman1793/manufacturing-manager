@@ -31,7 +31,7 @@ import { FormState, formReducer } from 'src/app/shared/store/form';
 import { FinishedGoodsState } from './store/finished-goods.state';
 import { FinishedGoods } from './models/finished-goods';
 import { FinishedGoodsService } from './services/finished-goods.service';
-import { FormErrorPipe } from 'src/app/shared/pipes';
+import { SharedModule } from '../../shared/shared.module';
 
 const reducers: ActionReducerMap<FinishedGoodsState> = {
   [FINISHED_GOODS_CONTENT_STATE_NAME]: reducer,
@@ -44,7 +44,7 @@ const reducers: ActionReducerMap<FinishedGoodsState> = {
 };
 
 @NgModule({
-  declarations: [HomeComponent, UpdateDialogComponent, FormErrorPipe],
+  declarations: [HomeComponent, UpdateDialogComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -59,6 +59,7 @@ const reducers: ActionReducerMap<FinishedGoodsState> = {
     MatRadioModule,
     MatSelectModule,
     TableComponent,
+    SharedModule,
     StoreModule.forFeature(FINISHED_GOODS_STATE_NAME, reducers),
     EffectsModule.forFeature([FinishedGoodsEffects, FinishedGoodsFormEffects]),
   ],
