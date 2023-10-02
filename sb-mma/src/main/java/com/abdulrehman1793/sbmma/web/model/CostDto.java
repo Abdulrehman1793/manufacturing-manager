@@ -9,7 +9,7 @@ import lombok.Data;
 @Builder(toBuilder = true)
 public class CostDto {
     private int id;
-    @NotBlank(message = "Name is required")
+    @NotBlank()
     @Size(max = 50)
     private String name;
     @Size(max = 500)

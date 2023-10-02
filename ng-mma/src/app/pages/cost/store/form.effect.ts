@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
@@ -30,6 +30,21 @@ export class CostFormEffects {
             return FormAction.submitFormSuccess({ data });
           }),
           catchError((error: HttpErrorResponse) => {
+            if (error.status === HttpStatusCode.UnprocessableEntity) {
+              let errors: { field: string; message: string }[] =
+                error.error.errors;
+
+              let result = errors.map((row) => {
+                return `${row.field.toUpperCase()} ${row.message}`;
+              });
+
+              console.log(result);
+
+              return of(
+                FormAction.submitFormFailure({ error: error.error.errors })
+              );
+            }
+
             return of(FormAction.submitFormFailure({ error: error.error }));
           })
         );

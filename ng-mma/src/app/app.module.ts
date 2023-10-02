@@ -14,9 +14,10 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { appReducer, effects, entityConfig } from './store';
+import { FormErrorPipe } from './shared/pipes/form-error.pipe';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, FormErrorPipe],
   imports: [
     BrowserModule,
     AppRoutingModule,

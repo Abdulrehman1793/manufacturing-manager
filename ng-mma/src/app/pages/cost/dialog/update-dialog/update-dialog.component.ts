@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
-import { formId, submitted, submitting } from '../../store';
+import { error, formId, submitted, submitting } from '../../store';
 
 import { submitForm } from '../../../../shared/store';
 import { CostService } from '../../services/cost.service';
@@ -25,10 +25,11 @@ export class UpdateDialogComponent implements OnInit {
   submitting$: Observable<boolean> = of(false);
   submitted$: Observable<boolean> = of(false);
   formId$: Observable<string | null> = EMPTY;
+  error$: Observable<any> = EMPTY;
 
   form = this.fb.group({
-    name: ['', [Validators.required, Validators.maxLength(50)]],
-    description: ['', [Validators.maxLength(500)]],
+    name: ['', ],
+    description: ['', ],
     type: [''],
     costUnit: ['', [Validators.maxLength(50)]],
     amount: [0],
@@ -56,6 +57,7 @@ export class UpdateDialogComponent implements OnInit {
     this.submitted$ = this.store.select(submitted);
     this.submitting$ = this.store.select(submitting);
     this.formId$ = this.store.select(formId);
+    this.error$ = this.store.select(error);
 
     combineLatest([this.submitted$, this.submitting$, this.formId$]).subscribe(
       ([submitted, submitting, formId]) => {
