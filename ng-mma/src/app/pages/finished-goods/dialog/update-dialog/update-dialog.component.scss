@@ -1,0 +1,13 @@
+mat-form-field {
+  width: 100%;
+}
+
+.mdc-dialog__title + .mdc-dialog__content,
+.mdc-dialog__header + .mdc-dialog__content {
+  padding-top: 12px;
+}
+
+.form-error{
+  font-size: small;
+  color: var(--color-error);
+}
