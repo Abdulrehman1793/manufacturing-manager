@@ -54,7 +54,7 @@ public class FinishedGoodsServiceImpl implements FinishedGoodsService {
     @Override
     public void update(int id, FinishedGoodsDto goodsDto) {
         FinishedGoods finishedGoods = goodsRepository.findById(id)
-                .orElseThrow(() -> new BadRequestException("Cost could not be found"));
+                .orElseThrow(() -> new BadRequestException("Finished goods could not be found"));
 
         ProductType productType = finishedGoods.getType();
 
@@ -83,7 +83,7 @@ public class FinishedGoodsServiceImpl implements FinishedGoodsService {
     @Override
     public void delete(int id) {
         FinishedGoods goods = goodsRepository.findById(id)
-                .orElseThrow(() -> new BadRequestException("Cost could not be found"));
+                .orElseThrow(() -> new BadRequestException("Finished goods could not be found"));
 
         goodsRepository.delete(goods);
     }

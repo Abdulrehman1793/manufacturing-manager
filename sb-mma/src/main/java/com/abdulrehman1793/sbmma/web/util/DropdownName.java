@@ -1,5 +1,5 @@
 package com.abdulrehman1793.sbmma.web.util;
 
 public enum DropdownName {
-    ProductType
+    ProductType, UOM, PurchaseUnit
 }
