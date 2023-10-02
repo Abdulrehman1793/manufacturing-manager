@@ -24,22 +24,23 @@ public class FinishedGoods {
     private String description;
 
     @Builder.Default
-    private int batchQty = 0;
+    private Integer batchQty = 0;
 
     @Builder.Default
-    private double salesPrice = 0.00;
+    private Double salesPrice = 0.00;
 
     @Builder.Default
-    private double batchCost = 0.00;
+    @Column(nullable = true)
+    private Double batchCost = 0.00;
 
     @Builder.Default
-    private double itemCost = 0.00;
+    private Double itemCost = 0.00;
 
     @Builder.Default
-    private double itemProfit = 0.00;
+    private Double itemProfit = 0.00;
 
     @Builder.Default
-    private int qtyOnHand = 0;
+    private Integer qtyOnHand = 0;
 
     @ManyToOne
     private Image image;
