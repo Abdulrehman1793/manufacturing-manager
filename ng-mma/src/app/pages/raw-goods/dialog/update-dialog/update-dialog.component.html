@@ -22,7 +22,7 @@
       <mat-label>Description</mat-label>
       <textarea
         matInput
-        placeholder="Enter the detail about cost"
+        placeholder="Enter the detail about raw goods"
         formControlName="description"
       ></textarea>
       <mat-error *ngIf="form.controls.description.hasError('maxlength')"
@@ -30,6 +30,7 @@
       >
     </mat-form-field>
 
+    <!-- Product type -->
     <mat-form-field appearance="outline">
       <mat-label>Product Type</mat-label>
       <mat-select formControlName="type">
@@ -38,6 +39,29 @@
           [value]="productType.key"
         >
           {{ productType.value }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- UOM's -->
+    <mat-form-field appearance="outline">
+      <mat-label>Unit of Measures</mat-label>
+      <mat-select formControlName="uom">
+        <mat-option *ngFor="let uom of uoms$ | async" [value]="uom.key">
+          {{ uom.value }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Purchase Units -->
+    <mat-form-field appearance="outline">
+      <mat-label>Purchase Unit</mat-label>
+      <mat-select formControlName="purchaseUnit">
+        <mat-option
+          *ngFor="let purchaseUnit of purchaseUnits$ | async"
+          [value]="purchaseUnit.key"
+        >
+          {{ purchaseUnit.value }}
         </mat-option>
       </mat-select>
     </mat-form-field>

@@ -11,7 +11,7 @@ import { submitForm } from '../../../../shared/store';
 import { RawGoodsService } from '../../services/raw-goods.service';
 import { RawGoods } from '../../models/raw-goods';
 import { EMPTY, Observable, combineLatest, of } from 'rxjs';
-import { PRODUCTTYPE } from 'src/app/store/dropdown';
+import { PRODUCTTYPE, UOM, PURCHASEUNIT } from 'src/app/store/dropdown';
 import { KeyValuePair } from 'src/app/core/models';
 
 @Component({
@@ -41,6 +41,8 @@ export class UpdateDialogComponent implements OnInit {
   });
 
   productTypes$: Observable<KeyValuePair[]> = EMPTY;
+  uoms$: Observable<KeyValuePair[]> = EMPTY;
+  purchaseUnits$: Observable<KeyValuePair[]> = EMPTY;
 
   constructor(
     public dialogRef: MatDialogRef<UpdateDialogComponent>,
@@ -56,6 +58,9 @@ export class UpdateDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.productTypes$ = this.store.select(PRODUCTTYPE);
+    this.uoms$ = this.store.select(UOM);
+    this.purchaseUnits$ = this.store.select(PURCHASEUNIT);
+
     if (this.data && this.data.id) {
       this.form.patchValue(this.data);
     }
