@@ -24,8 +24,8 @@ public class Users {
     @Column(unique = true, length = 100)
     private String name;
 
-    @Column(unique = true, length = 50)
-    private String user_name;
+    @Column(name = "user_name", unique = true, length = 50)
+    private String userName;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String pwd;
