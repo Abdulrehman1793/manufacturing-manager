@@ -1,0 +1,134 @@
+<h1 mat-dialog-title>Add New Raw Goods</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form">
+    <!-- Name -->
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input
+        matInput
+        placeholder="Enter the name of the raw goods"
+        formControlName="name"
+      />
+      <mat-error *ngIf="form.controls.name.hasError('required')"
+        >Name is required</mat-error
+      >
+      <mat-error *ngIf="form.controls.name.hasError('maxlength')"
+        >Name should be less than 50 characters</mat-error
+      >
+    </mat-form-field>
+
+    <!-- Description -->
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        placeholder="Enter the detail about cost"
+        formControlName="description"
+      ></textarea>
+      <mat-error *ngIf="form.controls.description.hasError('maxlength')"
+        >Description should be less than 500 characters</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Product Type</mat-label>
+      <mat-select formControlName="type">
+        <mat-option
+          *ngFor="let productType of productTypes$ | async"
+          [value]="productType.key"
+        >
+          {{ productType.value }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div style="display: flex; column-gap: 6px">
+      <!-- UPC -->
+      <mat-form-field appearance="outline">
+        <mat-label>UPC</mat-label>
+        <input matInput placeholder="UPC" formControlName="upc" />
+      </mat-form-field>
+
+      <!-- reorderQty -->
+      <mat-form-field appearance="outline">
+        <mat-label>reorderQty</mat-label>
+        <input
+          matInput
+          type="number"
+          placeholder="reorderQty"
+          formControlName="reorderQty"
+        />
+      </mat-form-field>
+    </div>
+
+    <div style="display: flex; column-gap: 6px">
+      <!-- Min. Qty -->
+      <mat-form-field appearance="outline">
+        <mat-label>Min. Qty</mat-label>
+        <input
+          matInput
+          type="number"
+          placeholder="Min. Qty"
+          formControlName="minQty"
+        />
+      </mat-form-field>
+
+      <!-- Purchase Unit Qty -->
+      <mat-form-field appearance="outline">
+        <mat-label>Purchase Unit Qty</mat-label>
+        <input
+          matInput
+          type="number"
+          placeholder="Purchase Unit Qty"
+          formControlName="purchaseUnitQty"
+        />
+      </mat-form-field>
+    </div>
+
+    <div style="display: flex; column-gap: 6px">
+      <!-- Qty On Hand -->
+      <mat-form-field appearance="outline">
+        <mat-label>Qty On Hand</mat-label>
+        <input
+          matInput
+          type="number"
+          placeholder="Qty On Hand"
+          formControlName="qtyOnHand"
+        />
+      </mat-form-field>
+
+      <!-- Amount -->
+      <mat-form-field appearance="outline">
+        <mat-label>Amount</mat-label>
+        <input
+          matInput
+          type="number"
+          placeholder="Amount"
+          formControlName="amount"
+        />
+      </mat-form-field>
+    </div>
+  </form>
+  <div class="form-error" [innerHTML]="error$ | async | formError"></div>
+</div>
+<div mat-dialog-actions align="end">
+  <button
+    mat-button
+    color="warn"
+    [disabled]="(submitting$ | async) && !(submitted$ | async)"
+    cdkFocusInitial
+    (click)="onClose()"
+  >
+    Close
+  </button>
+  <button
+    mat-button
+    color="primary"
+    [disabled]="
+      ((submitting$ | async) && !(submitted$ | async)) || form.invalid
+    "
+    (click)="onSave()"
+  >
+    Save
+  </button>
+</div>

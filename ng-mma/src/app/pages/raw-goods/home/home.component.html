@@ -1,0 +1,14 @@
+<app-table
+  id="finishedGoodsTable"
+  #productTypeTable
+  [columns]="customColumns"
+  [rows$]="rows$"
+  [loading$]="loading$"
+  [totalElements$]="totalElements$"
+  [pageSize$]="pageSize$"
+  (onSortAndPageUpdate)="onSortAndPageUpdate($event)"
+  (onAdd)="onCreate()"
+  (onUpate)="onUpdate($event)"
+  (onDelete)="onDelete($event)"
+>
+</app-table>
