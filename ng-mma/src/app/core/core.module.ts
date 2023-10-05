@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
 import { ErrorHandlerService } from './services/error-handler.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpErrorInterceptor } from './interceptor/http-error.interceptor';
+import { AuthInterceptor } from './interceptor/auth.interceptor';
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent],
@@ -30,6 +31,11 @@ import { HttpErrorInterceptor } from './interceptor/http-error.interceptor';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
       multi: true,
     },
   ],
