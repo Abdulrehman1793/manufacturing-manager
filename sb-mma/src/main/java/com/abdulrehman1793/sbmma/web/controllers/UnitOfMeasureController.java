@@ -21,7 +21,7 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1/uom")
-//@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasRole('USER')")
 public class UnitOfMeasureController {
     private final String[] FIELDS = new String[]{"id", "name"};
 
