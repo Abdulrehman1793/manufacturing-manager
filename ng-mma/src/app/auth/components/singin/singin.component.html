@@ -28,5 +28,7 @@
 </form>
 
 <div>
-  <button mat-button color="primary">Login</button>
+  <button mat-button color="primary" [disabled]="form.invalid" (click)="singin()">
+    Login
+  </button>
 </div>
