@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-singin',
@@ -6,7 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./singin.component.scss'],
 })
 export class SinginComponent implements OnInit {
-  constructor() {}
+  form = this.fb.group({
+    userName: '',
+    password: '',
+  });
+
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {}
 }
