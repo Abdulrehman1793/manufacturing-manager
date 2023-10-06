@@ -7,6 +7,7 @@ import com.abdulrehman1793.sbmma.repository.TokenRepository;
 import com.abdulrehman1793.sbmma.repository.UserRepository;
 import com.abdulrehman1793.sbmma.services.AuthenticationService;
 import com.abdulrehman1793.sbmma.services.JwtService;
+import com.abdulrehman1793.sbmma.web.model.UserDto;
 import com.abdulrehman1793.sbmma.web.model.auth.AuthenticationRequest;
 import com.abdulrehman1793.sbmma.web.model.auth.AuthenticationResponse;
 import com.abdulrehman1793.sbmma.web.model.auth.RegisterRequest;
@@ -40,10 +41,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         saveUserToken(savedUser, jwtToken);
 
-        return AuthenticationResponse.builder()
-                .accessToken(jwtToken)
-                .refreshToken(refreshToken)
-                .build();
+        return buildAuthResponse(jwtToken, refreshToken, savedUser);
     }
 
     @Override
@@ -52,17 +50,15 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getUserName(), request.getPassword()));
 
-
         var user = repository.findByUserName(request.getUserName())
                 .orElseThrow();
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
+
         revokeAllUserTokens(user);
         saveUserToken(user, jwtToken);
-        return AuthenticationResponse.builder()
-                .accessToken(jwtToken)
-                .refreshToken(refreshToken)
-                .build();
+
+        return buildAuthResponse(jwtToken, refreshToken, user);
     }
 
     private void saveUserToken(User user, String jwtToken) {
@@ -85,5 +81,18 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             token.setRevoked(true);
         });
         tokenRepository.saveAll(validUserTokens);
+    }
+
+    private AuthenticationResponse buildAuthResponse(String jwtToken, String refreshToken, User user) {
+        return AuthenticationResponse.builder()
+                .accessToken(jwtToken)
+                .refreshToken(refreshToken)
+                .userDto(UserDto.builder()
+                        .name(user.getName())
+                        .userName(user.getUsername())
+                        .email(user.getEmail())
+                        .role(user.getRole())
+                        .build())
+                .build();
     }
 }
