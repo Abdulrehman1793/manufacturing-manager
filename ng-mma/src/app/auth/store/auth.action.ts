@@ -1,15 +1,15 @@
 import { createAction, props } from '@ngrx/store';
 
 import { User } from '../../core/models';
-import { AuthPayload } from '../models';
+import { AuthRequest, AuthResponse } from '../models';
 
 export const signin_request = createAction(
   '[Auth] Signin request',
-  props<{ payload: AuthPayload }>()
+  props<{ payload: AuthRequest }>()
 );
 export const signin_success = createAction(
   '[Auth] Signin success',
-  props<{ user: User }>()
+  props<{ authResponse: AuthResponse }>()
 );
 export const signin_failure = createAction(
   '[Auth] Signin failure',

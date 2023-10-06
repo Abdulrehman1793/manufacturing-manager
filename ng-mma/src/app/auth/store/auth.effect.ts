@@ -15,6 +15,24 @@ export class AuthEffects {
   constructor(
     private actions$: Actions,
     private _store: Store<AuthState>,
-    private _auth: AuthService
+    private _service: AuthService
   ) {}
+
+  findPage$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.signin_request),
+      switchMap(({ payload }) =>
+        this._service.signinByUsername(payload).pipe(
+          map((authResponse) => AuthActions.signin_success({ authResponse })),
+          catchError((error) =>
+            of(
+              AuthActions.signin_failure({
+                failure: error.message,
+              })
+            )
+          )
+        )
+      )
+    )
+  );
 }

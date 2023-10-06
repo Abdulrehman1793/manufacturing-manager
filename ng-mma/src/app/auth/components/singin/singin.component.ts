@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AuthState } from '../../store';
 import * as authActions from '../../store/auth.action';
-import { AuthPayload } from '../../models';
+import { AuthRequest } from '../../models';
 
 @Component({
   selector: 'app-singin',
@@ -22,7 +22,7 @@ export class SinginComponent implements OnInit {
 
   singin() {
     if (this.form.valid) {
-      const payload = this.form.value as AuthPayload;
+      const payload = this.form.value as AuthRequest;
       this.store.dispatch(authActions.signin_request({ payload }));
     }
   }

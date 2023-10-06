@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../../environments/environment';
 import { Role } from '../models/enums/role';
+import { AuthRequest, AuthResponse } from 'src/app/auth/models';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -10,8 +11,11 @@ export class AuthService {
 
   constructor(private _http: HttpClient) {}
 
-  signinByUsername(params: { username: string; password: string }) {
-    return this._http.post(`${this._rootUrl}/authenticate`, params);
+  signinByUsername(params: AuthRequest) {
+    return this._http.post<AuthResponse>(
+      `${this._rootUrl}/authenticate`,
+      params
+    );
   }
 
   signinByEmail(params: { email: string; password: string }) {
