@@ -1,34 +1,44 @@
-<p>singin works!</p>
-<form [formGroup]="form">
-  <!-- UserName -->
-  <mat-form-field appearance="outline">
-    <mat-label>Username</mat-label>
-    <input
-      matInput
-      placeholder="Enter the username"
-      formControlName="userName"
-    />
-    <mat-error *ngIf="form.controls.userName.hasError('required')"
-      >Username is required</mat-error
-    >
-  </mat-form-field>
+<div class="auth-container">
+  <div class="auth-form material-box">
+    <h1>Signin</h1>
 
-  <!-- Password -->
-  <mat-form-field appearance="outline">
-    <mat-label>Password</mat-label>
-    <input
-      matInput
-      placeholder="Enter the password"
-      formControlName="password"
-    />
-    <mat-error *ngIf="form.controls.password.hasError('required')"
-      >Password is required</mat-error
-    >
-  </mat-form-field>
-</form>
+    <form [formGroup]="form">
+      <!-- UserName -->
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input
+          matInput
+          placeholder="Enter the username"
+          formControlName="userName"
+        />
+        <mat-error *ngIf="form.controls.userName.hasError('required')"
+          >Username is required</mat-error
+        >
+      </mat-form-field>
 
-<div>
-  <button mat-button color="primary" [disabled]="form.invalid" (click)="singin()">
-    Login
-  </button>
+      <!-- Password -->
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          placeholder="Enter the password"
+          formControlName="password"
+        />
+        <mat-error *ngIf="form.controls.password.hasError('required')"
+          >Password is required</mat-error
+        >
+      </mat-form-field>
+    </form>
+
+    <div >
+      <button style="width: 100%;"
+        mat-raised-button
+        color="primary"
+        [disabled]="form.invalid"
+        (click)="singin()"
+      >
+        Login
+      </button>
+    </div>
+  </div>
 </div>

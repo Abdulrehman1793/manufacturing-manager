@@ -29,8 +29,10 @@ export class AuthEffects {
         const response = this._localStorageService.getItem();
         if (response)
           return of(AuthActions.auth_success({ user: response.user }));
-        else
+        else {
+          this._router.navigate(['auth','signin']);
           return of(AuthActions.auth_failure({ failure: 'Not authenticated' }));
+        }
       })
     )
   );
