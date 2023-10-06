@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { authenticateGuard } from './auth/guards/authenticate.guard';
 
 const routes: Routes = [
   {
     path: 'raw-goods',
     title: 'Raw goods',
+    canActivate: [authenticateGuard],
     loadChildren: () =>
       import('./pages/raw-goods/raw-goods.module').then(
         (m) => m.RawGoodsModule
