@@ -91,7 +91,7 @@ export class AuthEffects {
         ofType(AuthActions.signout_success),
         tap(({}) => {
           this._localStorageService.removeItem();
-          this._router.navigate(['dashboard']);
+          this._router.navigate(['auth', 'signin']);
         })
       ),
     { dispatch: false }

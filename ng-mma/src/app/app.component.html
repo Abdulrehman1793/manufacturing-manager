@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-header *ngIf="user$ | async"></app-header>
 
 <main class="content">
   <article class="page-content">
