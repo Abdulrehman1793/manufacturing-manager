@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
       { title: 'Dashboard', route: 'dashboard' },
       {
         title: 'Master`s',
+        route: 'master',
         children: [
           { title: 'Raw Goods', route: 'raw-goods' },
           { title: 'Finished Goods', route: 'finished-goods' },

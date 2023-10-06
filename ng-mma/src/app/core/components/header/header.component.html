@@ -9,23 +9,25 @@
     <button
       mat-flat-button
       color="primary"
-      [routerLink]="menu?.route ? [menu.route] : null"
+      [routerLink]="menu?.children ? null : [menu.route]"
       routerLinkActive="mat-accent"
-      [matMenuTriggerFor]="menuSelector"
+      [matMenuTriggerFor]="menu?.children ? menuSelector : null"
       (click)="openMenu(menu)"
     >
       {{ menu.title }}
     </button>
     <mat-menu #menuSelector="matMenu">
-      <button
-        *ngFor="let subMenu1 of selectedMenu1"
-        mat-menu-item
-        color="primary"
-        [routerLink]="subMenu1?.route ? [subMenu1.route] : null"
-        routerLinkActive="mat-accent"
-      >
-        {{ subMenu1.title }}
-      </button>
+      <ng-container *ngIf="menu?.children">
+        <button
+          *ngFor="let subMenu1 of selectedMenu1"
+          mat-menu-item
+          color="primary"
+          [routerLink]="subMenu1?.route ? [menu.route, subMenu1.route] : null"
+          routerLinkActive="mat-accent"
+        >
+          {{ subMenu1.title }}
+        </button>
+      </ng-container>
     </mat-menu>
   </div>
   <span class="spacer"></span>
