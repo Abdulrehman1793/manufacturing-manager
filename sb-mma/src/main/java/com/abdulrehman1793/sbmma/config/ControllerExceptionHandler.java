@@ -1,6 +1,7 @@
 package com.abdulrehman1793.sbmma.config;
 
 import com.abdulrehman1793.sbmma.web.model.ErrorResponse;
+import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -31,7 +32,6 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
         }
         return ResponseEntity.unprocessableEntity().body(errorResponse);
     }
-
 
 
     @ExceptionHandler(BadCredentialsException.class)

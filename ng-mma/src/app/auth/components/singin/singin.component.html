@@ -30,15 +30,27 @@
       </mat-form-field>
     </form>
 
-    <div >
-      <button style="width: 100%;"
+    <div>
+      <button
+        style="
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          width: 100%;
+        "
         mat-raised-button
         color="primary"
-        [disabled]="form.invalid"
+        [disabled]="form.invalid || (loading$ | async)"
         (click)="singin()"
       >
-        Login
+        <span style="margin-left: 8px"> Login </span>
       </button>
+      <mat-progress-bar
+        *ngIf="loading$ | async"
+        color="warn"
+        mode="indeterminate"
+      >
+      </mat-progress-bar>
     </div>
   </div>
 </div>

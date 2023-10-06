@@ -13,16 +13,16 @@ mat-form-field {
 .auth-form {
   display: flex;
   flex-direction: column;
-  padding: 2rem 4rem;
+  padding: 1.5rem 3rem;
 }
 
 .material-box {
   background-color: #fff;
   border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   transition: box-shadow 0.3s ease-in-out;
 
   &:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   }
 }
