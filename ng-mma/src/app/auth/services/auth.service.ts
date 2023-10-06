@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../../environments/environment';
-import { Role } from '../models/enums/role';
+import { Role } from '../../core/models/enums/role';
 import { AuthRequest, AuthResponse } from 'src/app/auth/models';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class AuthService {
   _rootUrl: string = `${environment.apiUrl}/auth`;
 

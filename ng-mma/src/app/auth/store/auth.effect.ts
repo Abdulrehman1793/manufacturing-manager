@@ -7,22 +7,24 @@ import { Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import * as AuthActions from './auth.action';
-import { AuthService } from '../../core/services/auth.service';
+import { AuthService } from '../services/auth.service';
 import { AuthState } from './auth.state';
+import { LocalStorageService } from '../services/local-storage.service';
 
 @Injectable()
 export class AuthEffects {
   constructor(
     private actions$: Actions,
     private _store: Store<AuthState>,
-    private _service: AuthService
+    private _authService: AuthService,
+    private _localStorageService: LocalStorageService
   ) {}
 
-  findPage$ = createEffect(() =>
+  signin$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.signin_request),
       switchMap(({ payload }) =>
-        this._service.signinByUsername(payload).pipe(
+        this._authService.signinByUsername(payload).pipe(
           map((authResponse) => AuthActions.signin_success({ authResponse })),
           catchError((error) =>
             of(
@@ -34,5 +36,16 @@ export class AuthEffects {
         )
       )
     )
+  );
+
+  handleSigninSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AuthActions.signin_success),
+        tap(({ authResponse }) => {
+          this._localStorageService.setItem(authResponse);
+        })
+      ),
+    { dispatch: false }
   );
 }

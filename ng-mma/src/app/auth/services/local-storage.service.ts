@@ -9,7 +9,9 @@ export class LocalStorageService {
 
   constructor() {}
 
-  setItem() {}
+  setItem(params: any) {
+    window.localStorage.setItem('tokens', JSON.stringify(params));
+  }
 
   getItem() {}
 

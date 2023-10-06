@@ -15,6 +15,8 @@ import { SinginComponent } from './components/singin/singin.component';
 
 import { SharedModule } from '../shared/shared.module';
 import { AuthRoutingModule } from './auth-routing.module';
+import { AuthService } from './services/auth.service';
+import { LocalStorageService } from './services/local-storage.service';
 
 @NgModule({
   declarations: [SinginComponent, SingupComponent],
@@ -29,5 +31,6 @@ import { AuthRoutingModule } from './auth-routing.module';
     StoreModule.forFeature(AUTH_STATE_NAME, authReducer),
     EffectsModule.forFeature([AuthEffects]),
   ],
+  providers: [AuthService, LocalStorageService],
 })
 export class AuthModule {}
