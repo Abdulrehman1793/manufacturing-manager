@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { map, of } from 'rxjs';
+import { map } from 'rxjs';
 import { AuthState, auth_user } from '../store';
 
 export const authenticateGuard: CanActivateFn = (route, state) => {
@@ -9,9 +9,8 @@ export const authenticateGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   return authStore.select(auth_user).pipe(
     map((user) => {
-      if (user) {
-        return true;
-      }
+      if (user) return true;
+
       router.navigate(['auth/signin']);
       return false;
     })

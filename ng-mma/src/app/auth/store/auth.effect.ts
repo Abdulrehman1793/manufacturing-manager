@@ -10,6 +10,7 @@ import * as AuthActions from './auth.action';
 import { AuthService } from '../services/auth.service';
 import { AuthState } from './auth.state';
 import { LocalStorageService } from '../services/local-storage.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthEffects {
@@ -17,7 +18,8 @@ export class AuthEffects {
     private actions$: Actions,
     private _store: Store<AuthState>,
     private _authService: AuthService,
-    private _localStorageService: LocalStorageService
+    private _localStorageService: LocalStorageService,
+    private _router: Router
   ) {}
 
   auth$ = createEffect(() =>
@@ -31,6 +33,15 @@ export class AuthEffects {
           return of(AuthActions.auth_failure({ failure: 'Not authenticated' }));
       })
     )
+  );
+
+  handleAuthSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AuthActions.auth_success),
+        tap(() => this._router.navigate(['dashboard']))
+      ),
+    { dispatch: false }
   );
 
   signin$ = createEffect(() =>
@@ -57,6 +68,7 @@ export class AuthEffects {
         ofType(AuthActions.signin_success),
         tap(({ authResponse }) => {
           this._localStorageService.setItem(authResponse);
+          this._router.navigate(['dashboard']);
         })
       ),
     { dispatch: false }

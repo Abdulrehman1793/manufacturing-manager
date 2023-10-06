@@ -1,13 +1,13 @@
 import { User } from '../../core/models';
 
 export interface AuthState {
-  user: User | undefined;
+  user: User | null;
   loading: boolean;
   error: string | undefined;
 }
 
 export const initialState: AuthState = {
-  user: undefined,
+  user: null,
   loading: false,
   error: undefined,
 };

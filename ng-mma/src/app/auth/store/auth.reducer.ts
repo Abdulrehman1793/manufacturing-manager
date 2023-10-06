@@ -16,7 +16,7 @@ const _reducer = createReducer(
   })),
   on(Actions.auth_remove, (state) => ({
     ...state,
-    user: undefined,
+    user: null,
     loading: false,
   })),
   on(Actions.auth_failure, (state, { failure }) => ({

@@ -1,18 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+
 import { Store } from '@ngrx/store';
-import { AppState } from './store';
-import { auth_request } from './auth/store';
+import { EMPTY, Observable } from 'rxjs';
+
+import { AuthState, auth_request } from './auth/store';
+import { User } from './core/models';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
-  constructor(public title: Title, private store: Store<AppState>) {}
+export class AppComponent {
+  user$: Observable<User | null> = EMPTY;
 
-  ngOnInit(): void {
-    this.store.dispatch(auth_request());
+  constructor(public title: Title, private store: Store<AuthState>) {
+    store.dispatch(auth_request());
   }
 }
