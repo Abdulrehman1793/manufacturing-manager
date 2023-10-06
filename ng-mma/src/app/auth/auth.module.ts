@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -17,6 +18,7 @@ import { SharedModule } from '../shared/shared.module';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthService } from './services/auth.service';
 import { LocalStorageService } from './services/local-storage.service';
+import { AuthTokenInterceptor } from './interceptor/auth-token.interceptor';
 
 @NgModule({
   declarations: [SinginComponent, SingupComponent],
@@ -31,6 +33,10 @@ import { LocalStorageService } from './services/local-storage.service';
     StoreModule.forFeature(AUTH_STATE_NAME, authReducer),
     EffectsModule.forFeature([AuthEffects]),
   ],
-  providers: [AuthService, LocalStorageService],
+  providers: [
+    AuthService,
+    LocalStorageService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true },
+  ],
 })
 export class AuthModule {}
