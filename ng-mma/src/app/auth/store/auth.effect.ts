@@ -20,6 +20,19 @@ export class AuthEffects {
     private _localStorageService: LocalStorageService
   ) {}
 
+  auth$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.auth_request),
+      switchMap(({}) => {
+        const response = this._localStorageService.getItem();
+        if (response)
+          return of(AuthActions.auth_success({ user: response.user }));
+        else
+          return of(AuthActions.auth_failure({ failure: 'Not authenticated' }));
+      })
+    )
+  );
+
   signin$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.signin_request),
