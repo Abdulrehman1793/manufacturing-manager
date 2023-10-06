@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-singin',
   templateUrl: './singin.component.html',
-  styleUrls: ['./singin.component.scss']
+  styleUrls: ['./singin.component.scss'],
 })
-export class SinginComponent {
+export class SinginComponent implements OnInit {
+  constructor() {}
 
+  ngOnInit(): void {}
 }
