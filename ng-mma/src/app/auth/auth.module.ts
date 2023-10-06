@@ -6,9 +6,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { AUTH_STATE_NAME, AuthEffects, authReducer } from './store';
+import { SingupComponent } from './components/singup/singup.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    SingupComponent
+  ],
   imports: [
     CommonModule,
     AuthRoutingModule,
