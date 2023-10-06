@@ -32,7 +32,21 @@
   </div>
   <span class="spacer"></span>
 
-  <button mat-icon-button aria-label="Log out" color="warn">
-    <mat-icon>power_settings_new</mat-icon>
-  </button>
+  <div *ngIf="user$ | async as user">
+    <div
+      class="profile-container"
+      matRipple
+      [matRippleCentered]="true"
+      [matMenuTriggerFor]="profile"
+    >
+      <span class="name">{{ user.name }}</span>
+      <mat-icon aria-hidden="false" aria-label="User Profile"
+        >account_circle</mat-icon
+      >
+    </div>
+    <mat-menu #profile="matMenu">
+      <button mat-menu-item>Update profile</button>
+      <button mat-menu-item (click)="signOut()">Sign out</button>
+    </mat-menu>
+  </div>
 </mat-toolbar>

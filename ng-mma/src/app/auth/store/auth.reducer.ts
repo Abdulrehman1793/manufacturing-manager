@@ -23,6 +23,36 @@ const _reducer = createReducer(
     ...state,
     loading: false,
     failure,
+  })),
+  // Signin
+  on(Actions.signin_request, (state) => ({
+    ...state,
+    loading: true,
+  })),
+  on(Actions.signin_success, (state, { authResponse }) => ({
+    ...state,
+    user: authResponse.user,
+    loading: false,
+  })),
+  on(Actions.signin_failure, (state, { failure }) => ({
+    ...state,
+    loading: false,
+    failure,
+  })),
+
+  // Signout
+  on(Actions.signout_request, (state) => ({
+    ...state,
+    loading: true,
+  })),
+  on(Actions.signout_success, (state) => ({
+    ...initialState,
+    loading: false,
+  })),
+  on(Actions.signout_failure, (state, { failure }) => ({
+    ...state,
+    loading: false,
+    failure,
   }))
 );
 

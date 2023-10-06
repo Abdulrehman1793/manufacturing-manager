@@ -16,6 +16,13 @@ export const signin_failure = createAction(
   props<{ failure: string }>()
 );
 
+export const signout_request = createAction('[Auth] Sign out request');
+export const signout_success = createAction('[Auth] Sign out success');
+export const signout_failure = createAction(
+  '[Auth] Sign out failure',
+  props<{ failure: string }>()
+);
+
 export const auth_request = createAction('[Auth] request');
 export const auth_success = createAction(
   '[Auth] success',

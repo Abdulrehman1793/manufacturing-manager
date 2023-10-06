@@ -5,3 +5,17 @@
 .spacer {
   flex: 1 1 auto;
 }
+
+.profile-container {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  border-radius: 5px;
+  border: 1px solid white;
+  padding: 4px 12px;
+  z-index: 10;
+
+  .name{
+    font-size: 17px;
+  }
+}

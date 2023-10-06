@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { EMPTY, Observable } from 'rxjs';
+
+import { AuthState, auth_user, signout_request } from '../../../auth/store';
+import { User } from '../../models';
 
 @Component({
   selector: 'app-header',
@@ -8,6 +13,12 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
   menus: Menu[] = [];
   selectedMenu1: Menu[] = [];
+
+  user$: Observable<User | null> = EMPTY;
+
+  constructor(private _store: Store<AuthState>) {
+    this.user$ = _store.select(auth_user);
+  }
 
   ngOnInit(): void {
     this.menus = [
@@ -34,6 +45,10 @@ export class HeaderComponent implements OnInit {
 
   openMenu(menu: Menu) {
     this.selectedMenu1 = menu.children || [];
+  }
+
+  signOut() {
+    this._store.dispatch(signout_request());
   }
 }
 

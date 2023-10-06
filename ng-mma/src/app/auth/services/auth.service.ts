@@ -32,5 +32,7 @@ export class AuthService {
     return this._http.post(`${this._rootUrl}/register`, params);
   }
 
-  logout() {}
+  logout() {
+    return this._http.post(`${this._rootUrl}/logout`, {});
+  }
 }

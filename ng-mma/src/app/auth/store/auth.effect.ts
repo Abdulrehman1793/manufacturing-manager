@@ -73,4 +73,27 @@ export class AuthEffects {
       ),
     { dispatch: false }
   );
+
+  signout$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.signout_request),
+      switchMap(({}) => {
+        return this._authService
+          .logout()
+          .pipe(map(() => AuthActions.signout_success()));
+      })
+    )
+  );
+
+  handleSignoutSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AuthActions.signout_success),
+        tap(({}) => {
+          this._localStorageService.removeItem();
+          this._router.navigate(['dashboard']);
+        })
+      ),
+    { dispatch: false }
+  );
 }
