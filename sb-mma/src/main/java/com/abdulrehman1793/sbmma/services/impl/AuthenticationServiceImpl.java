@@ -12,8 +12,11 @@ import com.abdulrehman1793.sbmma.web.model.auth.AuthenticationRequest;
 import com.abdulrehman1793.sbmma.web.model.auth.AuthenticationResponse;
 import com.abdulrehman1793.sbmma.web.model.auth.RegisterRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,6 +25,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +36,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
+    @PersistenceContext
+    private final EntityManager entityManager;
+
+    @Transactional
     @Override
     public AuthenticationResponse register(RegisterRequest request) {
         var user = User.builder()
@@ -50,6 +58,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         return buildAuthResponse(jwtToken, refreshToken, savedUser);
     }
 
+    @Transactional
     @Override
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
 
@@ -67,28 +76,33 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         return buildAuthResponse(jwtToken, refreshToken, user);
     }
 
+    @Transactional
     @Override
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
         final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         final String refreshToken;
         final String userName;
-        if (authHeader == null ||!authHeader.startsWith("Bearer ")) {
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             return;
         }
         refreshToken = authHeader.substring(7);
+        System.out.println("Refresh token::  \t" + refreshToken);
         userName = jwtService.extractUsername(refreshToken);
         if (userName != null) {
             var user = this.repository.findByUserName(userName)
                     .orElseThrow();
             if (jwtService.isTokenValid(refreshToken, user)) {
+
                 var accessToken = jwtService.generateToken(user);
+                System.out.println("Access token::  \t" + accessToken);
+                Optional<Token> byToken = tokenRepository.findByToken(accessToken);
                 revokeAllUserTokens(user);
                 saveUserToken(user, accessToken);
-                var authResponse = AuthenticationResponse.builder()
-                        .accessToken(accessToken)
-                        .refreshToken(refreshToken)
-                        .build();
-                new ObjectMapper().writeValue(response.getOutputStream(), authResponse);
+
+                // Clear the entity manager's persistence context
+                entityManager.clear();
+
+                new ObjectMapper().writeValue(response.getOutputStream(), buildAuthResponse(accessToken, refreshToken, user));
             }
         }
     }

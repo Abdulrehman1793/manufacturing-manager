@@ -16,6 +16,17 @@ export const signin_failure = createAction(
   props<{ failure: string }>()
 );
 
+export const refresh_request = createAction('[Auth] Refresh token request');
+export const refresh_progress = createAction('[Auth] Refresh token progress');
+export const refresh_success = createAction(
+  '[Auth] Refresh token success',
+  props<{ authResponse: AuthResponse }>()
+);
+export const refresh_failure = createAction(
+  '[Auth] Refresh token failure',
+  props<{ failure: string }>()
+);
+
 export const signout_request = createAction('[Auth] Sign out request');
 export const signout_success = createAction('[Auth] Sign out success');
 export const signout_failure = createAction(

@@ -14,6 +14,10 @@ export const auth_loading = createSelector(
   confirmationState,
   (state) => state.loading
 );
+export const refresh = createSelector(
+  confirmationState,
+  (state) => state.refresh
+);
 export const auth_error = createSelector(
   confirmationState,
   (state) => state.error

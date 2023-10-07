@@ -53,6 +53,28 @@ const _reducer = createReducer(
     ...state,
     loading: false,
     failure,
+  })),
+  // Refrsh token
+  on(Actions.refresh_request, (state) => ({
+    ...state,
+    loading: true,
+  })),
+  on(Actions.refresh_progress, (state) => ({
+    ...state,
+    refresh: true,
+    loading: true,
+  })),
+  on(Actions.refresh_success, (state, { authResponse }) => ({
+    ...state,
+    user: authResponse.user,
+    refresh: false,
+    loading: false,
+  })),
+  on(Actions.refresh_failure, (state, { failure }) => ({
+    ...state,
+    refresh: false,
+    loading: false,
+    failure,
   }))
 );
 

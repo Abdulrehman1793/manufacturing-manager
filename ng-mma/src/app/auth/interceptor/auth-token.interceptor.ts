@@ -17,6 +17,12 @@ export class AuthTokenInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     const auth = this._localStorageService.getItem();
+
+    // Check if the request is a refreshToken request
+    if (this.isRefreshTokenRequest(request)) {
+      return next.handle(request);
+    }
+
     if (auth)
       request = request.clone({
         setHeaders: {
@@ -24,5 +30,9 @@ export class AuthTokenInterceptor implements HttpInterceptor {
         },
       });
     return next.handle(request);
+  }
+
+  private isRefreshTokenRequest(request: HttpRequest<any>): boolean {
+    return request.url.includes('/refresh-token');
   }
 }

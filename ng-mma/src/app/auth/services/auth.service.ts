@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { environment } from '../../../environments/environment';
 import { Role } from '../../core/models/enums/role';
@@ -20,6 +20,18 @@ export class AuthService {
 
   signinByEmail(params: { email: string; password: string }) {
     return this._http.post(`${this._rootUrl}/authenticate`, params);
+  }
+
+  refreshToken(refreshToken: string) {
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + refreshToken,
+    });
+
+    return this._http.post<AuthResponse>(
+      `${this._rootUrl}/refresh-token`,
+      {},
+      { headers }
+    );
   }
 
   signup(params: {
