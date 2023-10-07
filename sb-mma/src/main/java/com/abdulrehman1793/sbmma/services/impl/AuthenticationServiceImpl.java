@@ -12,8 +12,6 @@ import com.abdulrehman1793.sbmma.web.model.auth.AuthenticationRequest;
 import com.abdulrehman1793.sbmma.web.model.auth.AuthenticationResponse;
 import com.abdulrehman1793.sbmma.web.model.auth.RegisterRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
@@ -25,7 +23,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -35,9 +32,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
-
-    @PersistenceContext
-    private final EntityManager entityManager;
 
     @Transactional
     @Override
@@ -86,21 +80,16 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             return;
         }
         refreshToken = authHeader.substring(7);
-        System.out.println("Refresh token::  \t" + refreshToken);
+
         userName = jwtService.extractUsername(refreshToken);
         if (userName != null) {
             var user = this.repository.findByUserName(userName)
                     .orElseThrow();
             if (jwtService.isTokenValid(refreshToken, user)) {
-
                 var accessToken = jwtService.generateToken(user);
-                System.out.println("Access token::  \t" + accessToken);
-                Optional<Token> byToken = tokenRepository.findByToken(accessToken);
+
                 revokeAllUserTokens(user);
                 saveUserToken(user, accessToken);
-
-                // Clear the entity manager's persistence context
-                entityManager.clear();
 
                 new ObjectMapper().writeValue(response.getOutputStream(), buildAuthResponse(accessToken, refreshToken, user));
             }
