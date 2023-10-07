@@ -15,7 +15,7 @@ import { Staff } from '../models/staff';
 import { UpdateDialogComponent } from '../dialog/update-dialog/update-dialog.component';
 
 @Component({
-  selector: 'app-home',
+  selector: 'staff-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })

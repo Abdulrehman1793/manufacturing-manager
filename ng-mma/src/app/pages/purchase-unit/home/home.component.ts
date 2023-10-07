@@ -24,7 +24,7 @@ import { PurchaseUnit } from '../models/purchase-unit';
 import { UpdateDialogComponent } from '../dialog/update-dialog/update-dialog.component';
 
 @Component({
-  selector: 'app-home',
+  selector: 'purchase-unit-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })

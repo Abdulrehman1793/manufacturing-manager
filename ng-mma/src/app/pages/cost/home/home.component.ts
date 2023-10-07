@@ -21,7 +21,7 @@ import { AppState } from 'src/app/store';
 import { PRODUCTTYPE, dropdown_request } from 'src/app/store/dropdown';
 
 @Component({
-  selector: 'app-home',
+  selector: 'cost-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })

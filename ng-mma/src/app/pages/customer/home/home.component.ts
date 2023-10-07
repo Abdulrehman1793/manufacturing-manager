@@ -13,7 +13,7 @@ import { Search } from '../../../core/models';
 import { Customer } from '../models/customer';
 
 @Component({
-  selector: 'app-home',
+  selector: 'customer-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })

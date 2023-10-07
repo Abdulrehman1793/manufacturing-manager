@@ -30,7 +30,7 @@ import { AppState } from 'src/app/store';
 import { dropdown_request } from 'src/app/store/dropdown';
 
 @Component({
-  selector: 'app-home',
+  selector: 'product-type-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
