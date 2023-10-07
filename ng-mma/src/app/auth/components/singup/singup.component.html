@@ -1,1 +1,103 @@
-<p>singup works!</p>
+<div class="auth-container">
+  <div class="auth-form material-box">
+    <h1>New User Register</h1>
+
+    <form [formGroup]="form">
+      <!-- Name -->
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input
+          matInput
+          placeholder="Enter the user`s full name"
+          formControlName="name"
+        />
+        <mat-error *ngIf="form.controls.name.hasError('required')"
+          >Name is required</mat-error
+        >
+      </mat-form-field>
+
+      <!-- UserName -->
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input
+          matInput
+          placeholder="Enter the username"
+          formControlName="userName"
+        />
+        <mat-error *ngIf="form.controls.userName.hasError('required')"
+          >Username is required</mat-error
+        >
+      </mat-form-field>
+
+      <!-- Email -->
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Enter email" formControlName="email" />
+        <mat-error *ngIf="form.controls.email.hasError('required')"
+          >Email is required</mat-error
+        >
+      </mat-form-field>
+
+      <!-- Password -->
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          placeholder="Enter the password"
+          formControlName="password"
+        />
+        <mat-error *ngIf="form.controls.password.hasError('required')"
+          >Password is required</mat-error
+        >
+      </mat-form-field>
+
+      <!-- Confirm Password -->
+      <mat-form-field appearance="outline">
+        <mat-label>Confirm Password</mat-label>
+        <input
+          matInput
+          placeholder="Enter the confirm password"
+          formControlName="confirmPassword"
+        />
+        <mat-error *ngIf="form.controls.confirmPassword.hasError('required')"
+          >Confirm Password is required</mat-error
+        >
+      </mat-form-field>
+    </form>
+
+    <div>
+      <button
+        style="
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          width: 100%;
+        "
+        mat-raised-button
+        color="primary"
+        [disabled]="form.invalid || (loading$ | async)"
+        (click)="singup()"
+      >
+        <span style="margin-left: 8px"> Register </span>
+      </button>
+      <mat-progress-bar
+        *ngIf="loading$ | async"
+        color="warn"
+        mode="indeterminate"
+      >
+      </mat-progress-bar>
+    </div>
+
+    <div
+      style="
+        margin-top: 1rem;
+        justify-content: center;
+        display: flex;
+        gap: 0.5rem;
+      "
+    >
+      <h5>Already register?</h5>
+      <a [routerLink]="['/', 'auth', 'signin']">Signin</a>
+    </div>
+  </div>
+</div>
