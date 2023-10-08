@@ -1,21 +1,39 @@
 <h1 mat-dialog-title>Add New Finished Goods</h1>
 <div mat-dialog-content>
   <form [formGroup]="form">
-    <!-- Name -->
-    <mat-form-field appearance="outline">
-      <mat-label>Name</mat-label>
-      <input
-        matInput
-        placeholder="Enter the name of the cost"
-        formControlName="name"
-      />
-      <mat-error *ngIf="form.controls.name.hasError('required')"
-        >Name is required</mat-error
-      >
-      <mat-error *ngIf="form.controls.name.hasError('maxlength')"
-        >Name should be less than 50 characters</mat-error
-      >
-    </mat-form-field>
+    <div style="display: flex">
+      <div style="flex: 4">
+        <!-- Name -->
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input
+            matInput
+            placeholder="Enter the name of the cost"
+            formControlName="name"
+          />
+          <mat-error *ngIf="form.controls.name.hasError('required')"
+            >Name is required</mat-error
+          >
+          <mat-error *ngIf="form.controls.name.hasError('maxlength')"
+            >Name should be less than 50 characters</mat-error
+          >
+        </mat-form-field>
+
+        <!-- Product type -->
+        <mat-form-field appearance="outline">
+          <mat-label>Product Type</mat-label>
+          <mat-select formControlName="type">
+            <mat-option
+              *ngFor="let productType of productTypes$ | async"
+              [value]="productType.key"
+            >
+              {{ productType.value }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div style="flex: 1; padding: 1rem; text-align: center">Image</div>
+    </div>
 
     <!-- Description -->
     <mat-form-field appearance="outline">
@@ -28,18 +46,6 @@
       <mat-error *ngIf="form.controls.description.hasError('maxlength')"
         >Description should be less than 500 characters</mat-error
       >
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Product Type</mat-label>
-      <mat-select formControlName="type">
-        <mat-option
-          *ngFor="let productType of productTypes$ | async"
-          [value]="productType.key"
-        >
-          {{ productType.value }}
-        </mat-option>
-      </mat-select>
     </mat-form-field>
 
     <div style="display: flex; column-gap: 6px">
