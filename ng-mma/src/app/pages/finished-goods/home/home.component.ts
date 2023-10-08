@@ -37,19 +37,24 @@ export class HomeComponent implements OnInit {
       direction: 'asc',
     },
     {
-      columnDef: 'description',
-      title: 'Description',
-      sort: false,
-    },
-    {
       columnDef: 'type',
       title: 'Type',
       sort: false,
       lookup: PRODUCTTYPE,
     },
     {
+      columnDef: 'description',
+      title: 'Description',
+      sort: false,
+    },
+    {
       columnDef: 'batchQty',
       title: 'Batch Qty',
+      sort: false,
+    },
+    {
+      columnDef: 'salesPrice',
+      title: 'Sales Price',
       sort: false,
     },
     {
@@ -65,11 +70,6 @@ export class HomeComponent implements OnInit {
     {
       columnDef: 'itemProfit',
       title: 'Item Profit',
-      sort: false,
-    },
-    {
-      columnDef: 'salesPrice',
-      title: 'Sales Price',
       sort: false,
     },
     {

@@ -12,10 +12,10 @@ import lombok.*;
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Builder.Default
-    private int size = 0;
+    private Long size = 0L;
 
     @Column(length = 50, nullable = false)
     private String fileName;
