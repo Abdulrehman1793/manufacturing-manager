@@ -46,14 +46,14 @@ export class AuthEffects {
     )
   );
 
-  handleAuthSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(AuthActions.auth_success),
-        tap(() => this._router.navigate(['dashboard']))
-      ),
-    { dispatch: false }
-  );
+  // handleAuthSuccess$ = createEffect(
+  //   () =>
+  //     this.actions$.pipe(
+  //       ofType(AuthActions.auth_success),
+  //       tap(() => this._router.navigate(['dashboard']))
+  //     ),
+  //   { dispatch: false }
+  // );
 
   signin$ = createEffect(() =>
     this.actions$.pipe(
