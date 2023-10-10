@@ -15,11 +15,12 @@ export class ProfileImageComponent implements ControlValueAccessor {
     return this.innerValue;
   }
 
-  set value(v: string) {
+  set value(v: any) {
     if (v !== this.innerValue) {
       this.innerValue = v;
       this.onChange(v);
     }
+    console.log(v);
   }
 
   writeValue(value: any) {
@@ -37,5 +38,10 @@ export class ProfileImageComponent implements ControlValueAccessor {
 
   registerOnTouched(fn: any) {
     this.onTouch = fn;
+  }
+
+  onUploadFiles(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    console.log(inputElement.files);
   }
 }

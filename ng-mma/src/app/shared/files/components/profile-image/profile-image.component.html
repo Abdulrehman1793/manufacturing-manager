@@ -1,6 +1,7 @@
 <input
-  type="text"
+  type="file"
   [placeholder]="placeholder"
   [(ngModel)]="value"
   (blur)="onTouch()"
+  (change)="onUploadFiles($event)"
 />
