@@ -2,7 +2,7 @@
 <div mat-dialog-content>
   <form [formGroup]="form">
     <div style="display: flex">
-      <div style="flex: 4">
+      <div style="flex: 1">
         <!-- Name -->
         <mat-form-field appearance="outline">
           <mat-label>Name</mat-label>
@@ -32,7 +32,17 @@
           </mat-select>
         </mat-form-field>
       </div>
-      <div style="flex: 1; padding: 1rem; text-align: center">Image</div>
+      <div style="text-align: center">
+        <mat-form-field appearance="outline">
+          <mat-label>Batch Qty</mat-label>
+          <input
+            matInput
+            type="number"
+            placeholder="batchQty"
+            formControlName="batchQty"
+          />
+        </mat-form-field>
+      </div>
     </div>
 
     <!-- Description -->
