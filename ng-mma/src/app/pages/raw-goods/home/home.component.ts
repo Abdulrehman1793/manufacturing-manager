@@ -18,7 +18,7 @@ import { ConfirmationDialog } from 'src/app/shared/dialogs';
 import { RawGoodsService } from '../services/raw-goods.service';
 import { SuccessHandlerService } from 'src/app/core/services/succes-handler.service';
 import { AppState } from 'src/app/store';
-import { PRODUCTTYPE, dropdown_request } from 'src/app/store/dropdown';
+import { PRODUCTTYPE, dropdown_request } from 'src/app/store/lookup';
 
 @Component({
   selector: 'raw-goods-home',

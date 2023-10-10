@@ -12,7 +12,7 @@ import { FinishedGoodsService } from '../../services/finished-goods.service';
 import { FinishedGoods } from '../../models/finished-goods';
 import { EMPTY, Observable, combineLatest, of } from 'rxjs';
 import { ProductType } from 'src/app/pages/product-type/models/product-type';
-import { PRODUCTTYPE } from 'src/app/store/dropdown';
+import { PRODUCTTYPE } from 'src/app/store/lookup';
 import { KeyValuePair } from 'src/app/core/models';
 
 @Component({

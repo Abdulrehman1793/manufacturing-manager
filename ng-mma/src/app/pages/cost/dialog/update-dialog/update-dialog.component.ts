@@ -11,7 +11,7 @@ import { submitForm } from '../../../../shared/store';
 import { CostService } from '../../services/cost.service';
 import { Cost } from '../../models/cost';
 import { EMPTY, Observable, combineLatest, of } from 'rxjs';
-import { PRODUCTTYPE } from 'src/app/store/dropdown';
+import { PRODUCTTYPE } from 'src/app/store/lookup';
 import { KeyValuePair } from 'src/app/core/models';
 
 @Component({

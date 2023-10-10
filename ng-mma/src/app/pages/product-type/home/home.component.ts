@@ -27,7 +27,7 @@ import { ConfirmationDialog } from 'src/app/shared/dialogs';
 import { ProductTypeService } from '../services/product-type.service';
 import { SuccessHandlerService } from 'src/app/core/services/succes-handler.service';
 import { AppState } from 'src/app/store';
-import { dropdown_request } from 'src/app/store/dropdown';
+import { dropdown_request } from 'src/app/store/lookup';
 
 @Component({
   selector: 'product-type-home',

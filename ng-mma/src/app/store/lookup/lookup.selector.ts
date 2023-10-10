@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { DropdownState } from './dropdown.state';
+import { DropdownState } from './lookup.state';
 
-export const DROPDOWN_STATE_NAME = 'dropdown';
+export const DROPDOWN_STATE_NAME = 'lookup';
 
 const dropdownState = createFeatureSelector<DropdownState>(DROPDOWN_STATE_NAME);
 

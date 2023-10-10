@@ -10,7 +10,7 @@ import {
   dropdownReducer,
   DROPDOWN_STATE_NAME,
   DropdownEffects,
-} from './dropdown';
+} from './lookup';
 
 export interface AppState {
   [CONFIRMATION_STATE_NAME]: ConfirmationState;

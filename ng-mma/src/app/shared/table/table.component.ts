@@ -18,7 +18,7 @@ import { Observable, of } from 'rxjs';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MemoizedSelector, Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
-import { DropdownState } from 'src/app/store/dropdown';
+import { DropdownState } from 'src/app/store/lookup';
 import { KeyValuePair } from 'src/app/core/models';
 import { DropdownPipe } from '../pipes';
 

@@ -11,7 +11,7 @@ import { submitForm } from '../../../../shared/store';
 import { RawGoodsService } from '../../services/raw-goods.service';
 import { RawGoods } from '../../models/raw-goods';
 import { EMPTY, Observable, combineLatest, of } from 'rxjs';
-import { PRODUCTTYPE, UOM, PURCHASEUNIT } from 'src/app/store/dropdown';
+import { PRODUCTTYPE, UOM, PURCHASEUNIT } from 'src/app/store/lookup';
 import { KeyValuePair } from 'src/app/core/models';
 
 @Component({

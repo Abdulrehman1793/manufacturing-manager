@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 
-import * as Actions from './dropdown.action';
-import { DropdownState, initialState } from './dropdown.state';
+import * as Actions from './lookup.action';
+import { DropdownState, initialState } from './lookup.state';
 
 const _reducer = createReducer(
   initialState,
