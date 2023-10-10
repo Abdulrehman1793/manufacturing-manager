@@ -32,6 +32,7 @@ import { FinishedGoodsState } from './store/finished-goods.state';
 import { FinishedGoods } from './models/finished-goods';
 import { FinishedGoodsService } from './services/finished-goods.service';
 import { SharedModule } from '../../shared/shared.module';
+import { FilesModule } from 'src/app/shared/files/files.module';
 
 const reducers: ActionReducerMap<FinishedGoodsState> = {
   [FINISHED_GOODS_CONTENT_STATE_NAME]: reducer,
@@ -60,6 +61,7 @@ const reducers: ActionReducerMap<FinishedGoodsState> = {
     MatSelectModule,
     TableComponent,
     SharedModule,
+    FilesModule,
     StoreModule.forFeature(FINISHED_GOODS_STATE_NAME, reducers),
     EffectsModule.forFeature([FinishedGoodsEffects, FinishedGoodsFormEffects]),
   ],
