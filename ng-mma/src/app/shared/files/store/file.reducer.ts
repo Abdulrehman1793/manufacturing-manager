@@ -2,7 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import * as FileActions from './file.actions';
 import { initialState } from './file.state';
 
-export const formReducer = createReducer(
+export const filesReducer = createReducer(
   initialState,
   on(FileActions.file_save_request, (state, { file }) => ({
     ...state,

@@ -1,6 +1,6 @@
 // generic-form.actions.ts
 import { createAction, props } from '@ngrx/store';
-import { FileType } from './file.state';
+import { FileType } from '../models';
 
 export const file_save_request = createAction(
   '[File] Save request',

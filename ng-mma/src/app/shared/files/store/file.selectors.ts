@@ -1,7 +1,10 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { FileState, IFile } from './file.state';
+import { FileState } from './file.state';
+import { IFile } from '../models';
 
-const selectState = createFeatureSelector<FileState>('files');
+export const FILES_STATE_NAME = 'files';
+
+const selectState = createFeatureSelector<FileState>(FILES_STATE_NAME);
 
 export const files = createSelector(selectState, (state) => state.files);
 
