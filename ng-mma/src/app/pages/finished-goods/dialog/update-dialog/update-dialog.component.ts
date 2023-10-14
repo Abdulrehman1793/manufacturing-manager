@@ -37,6 +37,7 @@ export class UpdateDialogComponent implements OnInit {
     itemCost: [0],
     itemProfit: [0],
     qtyOnHand: [0],
+    image: ['1'],
   });
 
   productTypes$: Observable<KeyValuePair[]> = EMPTY;

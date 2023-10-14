@@ -5,6 +5,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
-public interface ImageService {
-    Image saveImage(MultipartFile imageFile) throws IOException;
+public interface FileService {
+    Image upload(MultipartFile imageFile) throws IOException;
 }

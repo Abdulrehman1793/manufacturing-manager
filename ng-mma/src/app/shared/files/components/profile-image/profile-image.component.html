@@ -1,5 +1,8 @@
+<div (click)="fileInput.click()">Select Image</div>
+
+<input type="file" #fileInput hidden (change)="onUploadFiles($event)" />
 <input
-  type="file"
+  hidden
   [placeholder]="placeholder"
   [(ngModel)]="value"
   (blur)="onTouch()"

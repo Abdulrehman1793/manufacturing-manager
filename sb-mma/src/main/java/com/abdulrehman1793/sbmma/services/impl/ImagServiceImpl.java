@@ -3,7 +3,7 @@ package com.abdulrehman1793.sbmma.services.impl;
 import com.abdulrehman1793.sbmma.exceptions.BadRequestException;
 import com.abdulrehman1793.sbmma.model.Image;
 import com.abdulrehman1793.sbmma.repository.ImageRepository;
-import com.abdulrehman1793.sbmma.services.ImageService;
+import com.abdulrehman1793.sbmma.services.FileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -14,12 +14,12 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class ImagServiceImpl implements ImageService {
+public class ImagServiceImpl implements FileService {
 
     private final ImageRepository imageRepository;
 
     @Override
-    public Image saveImage(MultipartFile imageFile) throws IOException {
+    public Image upload(MultipartFile imageFile) throws IOException {
         if (imageFile == null || imageFile.isEmpty()) {
             throw new BadRequestException("Please select a file to upload.");
         }

@@ -8,6 +8,12 @@ const selectState = createFeatureSelector<FileState>(FILES_STATE_NAME);
 
 export const files = createSelector(selectState, (state) => state.files);
 
+export const fileById = (id: number) => {
+  return createSelector(selectState, (state) => {
+    return state.files.some((row) => row.id == id);
+  });
+};
+
 export const filesMap = createSelector(selectState, (state) => {
   return state.files.reduce((row: Record<number, IFile>, item: IFile) => {
     row[item.id] = item;
