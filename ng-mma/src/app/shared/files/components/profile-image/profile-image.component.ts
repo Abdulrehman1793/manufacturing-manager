@@ -1,8 +1,9 @@
 import { Component, Input, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { FileState, file_save_request } from '../../store';
+import { FileState, file_cache_request, file_save_request } from '../../store';
 import { FileType } from '../../models';
+import { FilesService } from '../../services/files.service';
 
 @Component({
   selector: 'app-profile-image',
@@ -17,7 +18,10 @@ import { FileType } from '../../models';
   ],
 })
 export class ProfileImageComponent implements ControlValueAccessor {
-  constructor(private _store: Store<FileState>) {}
+  constructor(
+    private _store: Store<FileState>,
+    private _fileService: FilesService
+  ) {}
 
   @Input() placeholder: string = '';
 
@@ -57,10 +61,16 @@ export class ProfileImageComponent implements ControlValueAccessor {
 
     if (inputElement.files) {
       const file = inputElement.files.item(0);
-      if (file != null)
-        this._store.dispatch(
-          file_save_request({ file, fileType: FileType.image })
-        );
+      if (file != null) {
+        this._fileService.fileToBase64(file).then((base64) => {
+          this._store.dispatch(
+            file_cache_request({ base64, file, fileType: FileType.image })
+          );
+        });
+      }
+      // this._store.dispatch(
+      //   file_cache_request({ file, fileType: FileType.image })
+      // );
     }
   }
 }
