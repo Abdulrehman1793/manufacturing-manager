@@ -2,6 +2,9 @@ package com.abdulrehman1793.sbmma.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.JdbcTypeCode;
+
+import java.sql.Types;
 
 @Getter
 @Setter
@@ -21,5 +24,6 @@ public class Image {
     private String fileName;
 
     @Lob
+    @JdbcTypeCode(Types.VARBINARY)
     private byte[] imageData;
 }

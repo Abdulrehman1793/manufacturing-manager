@@ -54,7 +54,7 @@ CREATE TABLE image
     id         SERIAL PRIMARY KEY,
     size       int default 0,
     file_name  varchar(50) NOT NULL,
-    image_data OID
+    image_data bytea
 );
 
 drop table if exists raw_goods;
