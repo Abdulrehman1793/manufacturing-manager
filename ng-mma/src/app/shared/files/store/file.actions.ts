@@ -4,7 +4,7 @@ import { FileType } from '../models';
 
 export const cache_file = createAction(
   '[File] Cache',
-  props<{ base64: string; file: File; fileType: FileType }>()
+  props<{ id: number; base64: string; file: File; fileType: FileType }>()
 );
 
 export const file_save_request = createAction(

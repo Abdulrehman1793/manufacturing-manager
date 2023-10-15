@@ -33,15 +33,6 @@
         </mat-form-field>
       </div>
       <div style="text-align: center">
-        <!-- <mat-form-field appearance="outline">
-          <mat-label>Batch Qty</mat-label>
-          <input
-            matInput
-            type="number"
-            placeholder="batchQty"
-            formControlName="batchQty"
-          />
-        </mat-form-field> -->
         <app-profile-image formControlName="image"></app-profile-image>
       </div>
     </div>
@@ -153,4 +144,5 @@
   >
     Save
   </button>
+  <button mat-button (click)="formValue()">Form Value</button>
 </div>

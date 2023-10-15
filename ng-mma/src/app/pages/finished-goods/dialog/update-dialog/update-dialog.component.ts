@@ -37,7 +37,7 @@ export class UpdateDialogComponent implements OnInit {
     itemCost: [0],
     itemProfit: [0],
     qtyOnHand: [0],
-    image: [-1],
+    image: [0],
   });
 
   productTypes$: Observable<KeyValuePair[]> = EMPTY;
@@ -90,5 +90,9 @@ export class UpdateDialogComponent implements OnInit {
 
   onClose() {
     this.dialogRef.close(false);
+  }
+
+  formValue() {
+    console.log(this.form.value);
   }
 }

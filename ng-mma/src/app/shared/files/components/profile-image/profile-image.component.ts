@@ -21,34 +21,38 @@ import { EMPTY, Observable } from 'rxjs';
 export class ProfileImageComponent implements ControlValueAccessor {
   file$: Observable<IFile> = EMPTY;
 
+  currentTimestamp: number = new Date().getTime();
+
   constructor(
     private _store: Store<FileState>,
     private _fileService: FilesService
   ) {
-    this.file$ = _store.select(fileById(-1));
+    this.file$ = _store.select(fileById(this.innerValue));
   }
 
   @Input() placeholder: string = '';
 
-  private innerValue: string = '';
+  private innerValue: number = -this.currentTimestamp;
 
-  get value(): string {
+  get value(): number {
     return this.innerValue;
   }
 
-  set value(v: any) {
+  set value(v: number) {
     if (v !== this.innerValue) {
       this.innerValue = v;
       this.onChange(v);
     }
-    console.log(v);
   }
 
   writeValue(value: any) {
     if (value !== undefined) {
-      this.innerValue = value;
+      if (value === 0) {
+        this.innerValue = -this.currentTimestamp;
+      } else {
+        this.innerValue = value;
+      }
     }
-    console.log(value);
   }
 
   onChange: any = () => {};
@@ -70,7 +74,12 @@ export class ProfileImageComponent implements ControlValueAccessor {
       if (file != null) {
         this._fileService.fileToBase64(file).then((base64) => {
           this._store.dispatch(
-            cache_file({ base64, file, fileType: FileType.image })
+            cache_file({
+              id: this.innerValue,
+              base64,
+              file,
+              fileType: FileType.image,
+            })
           );
         });
       }

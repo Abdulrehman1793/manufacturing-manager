@@ -4,15 +4,15 @@ import { initialState } from './file.state';
 
 export const filesReducer = createReducer(
   initialState,
-  on(FileActions.cache_file, (state, { file, base64, fileType }) => {
-    const fileExists = state.files.some((row) => row.id === -1);
+  on(FileActions.cache_file, (state, { id, file, base64, fileType }) => {
+    const fileExists = state.files.some((row) => row.id === id);
 
     let files = state.files;
-    if (fileExists) files = files.filter((row) => row.id !== -1);
+    if (fileExists) files = files.filter((row) => row.id !== id);
 
     return {
       ...state,
-      files: [...files, { base64, id: -1, size: file.size, fileType }],
+      files: [...files, { base64, id, size: file.size, fileType }],
       loading: true,
       error: null,
     };
