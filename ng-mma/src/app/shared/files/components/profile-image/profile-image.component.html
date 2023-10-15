@@ -1,14 +1,23 @@
-<div (click)="fileInput.click()">Select Image</div>
+<div style="margin-left: 6px">
+  <div
+    *ngIf="file$ | async as file; else avatarPlaceholder"
+    (click)="fileInput.click()"
+  >
+    <img style="height: 140px; width: 150px" [src]="file.base64" />
+  </div>
 
-<div *ngIf="file$ | async as file">
-  <img style="height: 150px; width: 150px;" [src]="file.base64" />
+  <ng-template #avatarPlaceholder>
+    <div class="avatar-placeholder" (click)="fileInput.click()">
+      <img src="assets/images/150x150.png" alt="Avatar Placeholder" />
+    </div>
+  </ng-template>
+
+  <input type="file" #fileInput hidden (change)="onUploadFiles($event)" />
+  <input
+    hidden
+    [placeholder]="placeholder"
+    [(ngModel)]="value"
+    (blur)="onTouch()"
+    (change)="onUploadFiles($event)"
+  />
 </div>
-
-<input type="file" #fileInput hidden (change)="onUploadFiles($event)" />
-<input
-  hidden
-  [placeholder]="placeholder"
-  [(ngModel)]="value"
-  (blur)="onTouch()"
-  (change)="onUploadFiles($event)"
-/>
