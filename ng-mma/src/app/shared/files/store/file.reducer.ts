@@ -4,17 +4,16 @@ import { initialState } from './file.state';
 
 export const filesReducer = createReducer(
   initialState,
-  on(FileActions.file_cache_request, (state, { file, base64, fileType }) => ({
-    ...state,
-    files: [...state.files, { base64, id: -1, size: file.size, fileType }],
-    loading: true,
-    error: null,
-  })),
-  on(FileActions.file_cache_success, (state, { bytes, id, fileType, size }) => {
+  on(FileActions.cache_file, (state, { file, base64, fileType }) => {
+    const fileExists = state.files.some((row) => row.id === -1);
+
+    let files = state.files;
+    if (fileExists) files = files.filter((row) => row.id !== -1);
+
     return {
       ...state,
-      files: [...state.files, { bytes, id, size, fileType }],
-      loading: false,
+      files: [...files, { base64, id: -1, size: file.size, fileType }],
+      loading: true,
       error: null,
     };
   })

@@ -10,7 +10,7 @@ export const files = createSelector(selectState, (state) => state.files);
 
 export const fileById = (id: number) => {
   return createSelector(selectState, (state) => {
-    return state.files.some((row) => row.id == id);
+    return state.files.filter((row) => row.id == id)[0];
   });
 };
 

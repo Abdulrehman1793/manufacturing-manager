@@ -1,5 +1,9 @@
 <div (click)="fileInput.click()">Select Image</div>
 
+<div *ngIf="file$ | async as file">
+  <img style="height: 150px; width: 150px;" [src]="file.base64" />
+</div>
+
 <input type="file" #fileInput hidden (change)="onUploadFiles($event)" />
 <input
   hidden

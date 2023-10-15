@@ -1,9 +1,10 @@
 import { Component, Input, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { FileState, file_cache_request, file_save_request } from '../../store';
-import { FileType } from '../../models';
+import { FileState, fileById, cache_file } from '../../store';
+import { FileType, IFile } from '../../models';
 import { FilesService } from '../../services/files.service';
+import { EMPTY, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-profile-image',
@@ -18,10 +19,14 @@ import { FilesService } from '../../services/files.service';
   ],
 })
 export class ProfileImageComponent implements ControlValueAccessor {
+  file$: Observable<IFile> = EMPTY;
+
   constructor(
     private _store: Store<FileState>,
     private _fileService: FilesService
-  ) {}
+  ) {
+    this.file$ = _store.select(fileById(-1));
+  }
 
   @Input() placeholder: string = '';
 
@@ -43,6 +48,7 @@ export class ProfileImageComponent implements ControlValueAccessor {
     if (value !== undefined) {
       this.innerValue = value;
     }
+    console.log(value);
   }
 
   onChange: any = () => {};
@@ -64,13 +70,10 @@ export class ProfileImageComponent implements ControlValueAccessor {
       if (file != null) {
         this._fileService.fileToBase64(file).then((base64) => {
           this._store.dispatch(
-            file_cache_request({ base64, file, fileType: FileType.image })
+            cache_file({ base64, file, fileType: FileType.image })
           );
         });
       }
-      // this._store.dispatch(
-      //   file_cache_request({ file, fileType: FileType.image })
-      // );
     }
   }
 }
